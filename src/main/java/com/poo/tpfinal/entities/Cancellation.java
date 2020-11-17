@@ -6,11 +6,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Version;
 import javax.persistence.JoinColumn;
 import java.util.Date;
 
 @Entity
 public class Cancellation {
+    @Version
+    private Long version;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idCancelation")

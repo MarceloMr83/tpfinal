@@ -10,9 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Version;
 
 @Entity
 public class Booking {
+    @Version
+    private Long version;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idBooking")
