@@ -13,7 +13,7 @@ public class Room {
     private Long version;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "idRoom")
+    @Column(name = "idroom")
     private long idRoom;
     @Column(name = "name", nullable = true, length = 50)
     private String name;
@@ -21,7 +21,7 @@ public class Room {
     private float price;
     @Column(name = "occupancy", nullable = false, length = 10)
     private int occupancy;
-    @Column(name = "availabilty", nullable = false, length = 1)
+    @Column(name = "availability", nullable = false, length = 1)
     private int availability;
     @Column(name = "facilities", nullable = true, length = 50)
     private String facilities;
