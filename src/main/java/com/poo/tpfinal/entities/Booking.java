@@ -19,7 +19,7 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idBooking")
-    private long id;
+    private long idBooking;
     @OneToOne
     @JoinColumn(name = "idUser", updatable = false, nullable = false)
     private User guest;
@@ -49,11 +49,11 @@ public class Booking {
     
 
     public long getId() {
-        return id;
+        return idBooking;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(long idBooking) {
+        this.idBooking = idBooking;
     }
 
     public User getGuest() {
@@ -130,7 +130,7 @@ public class Booking {
 
     @Override
 	public String toString() {
-		return "User [id=" + id + ", guest=" + guest + ", checkIn=" + checkIn + ", checkOut=" +
+		return "User [id=" + idBooking + ", guest=" + guest + ", checkIn=" + checkIn + ", checkOut=" +
          checkOut + ", createdAt=" + createdAt + ", room=" + room.getName() + ", breackfastIncluded=" + breakfastIncluded + 
          ", parking=" + parking + ", freeCancelation=" + freeCancelation + ", cost=" + cost +"]";
 	}  

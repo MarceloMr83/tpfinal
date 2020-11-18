@@ -16,7 +16,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idUser")
-	private long id;
+	private long idUser;
 	@Column(name = "email", nullable = false, length = 150)
 	private String email;
 	@Column(name = "password", nullable = false, length = 50)
@@ -31,10 +31,10 @@ public class User {
 	private String nationality;
 		
 	public long getId() {
-		return id;
+		return idUser;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setId(long idUser) {
+		this.idUser = idUser;
 	}
 	
 	public String getEmail() {
@@ -64,7 +64,7 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", password=" + password + ", firstName=" +
+		return "User [id=" + idUser + ", email=" + email + ", password=" + password + ", firstName=" +
 		 firstName + ", lastName=" + lastName + "]";
 	}
 
@@ -82,6 +82,9 @@ public class User {
 
 	public void setNationality(String nationality) {
 		this.nationality = nationality;
+	}
+	public User orElseThrow(Object object) {
+		return null;
 	}
 		
 }

@@ -17,7 +17,7 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idPayment")
-    private long id;
+    private long idPayment;
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
     @OneToOne
@@ -29,11 +29,11 @@ public class Payment {
     private String cardNumber;
     
     public long getId() {
-        return id;
+        return idPayment;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(long idPayment) {
+        this.idPayment = idPayment;
     }
 
     public Date getCreatedAt() {
@@ -70,7 +70,7 @@ public class Payment {
     
     @Override
 	public String toString() {
-		return "User [id=" + id + ", createdAt=" + createdAt.toString() + ", booking=" + booking.toString() + ", card=" +
+		return "User [id=" + idPayment + ", createdAt=" + createdAt.toString() + ", booking=" + booking.toString() + ", card=" +
          card + ", cardNumber=" + cardNumber +"]";
 	}     
 }

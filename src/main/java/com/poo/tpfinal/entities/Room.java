@@ -14,7 +14,7 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idRoom")
-    private long id;
+    private long idRoom;
     @Column(name = "name", nullable = true, length = 50)
     private String name;
     @Column(name = "price", nullable = true, length = 10)
@@ -27,11 +27,11 @@ public class Room {
     private String facilities;
     
     public long getId() {
-        return id;
+        return idRoom;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(long idRoom) {
+        this.idRoom = idRoom;
     }
 
     public String getName() {
@@ -76,7 +76,7 @@ public class Room {
 
     @Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", price=" + price + ", occupancy=" +
+		return "User [idRoom=" + idRoom + ", name=" + name + ", price=" + price + ", occupancy=" +
 		 occupancy + ", availability=" + availability + ", facilities=" + facilities + "]";
 	}   
 

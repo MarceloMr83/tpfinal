@@ -17,7 +17,7 @@ public class Cancellation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idCancelation")
-    private long id;
+    private long idCancelation;
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
     @OneToOne
@@ -25,11 +25,11 @@ public class Cancellation {
     private Booking booking;
     
     public long getId() {
-        return id;
+        return idCancelation;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(long idCancelation) {
+        this.idCancelation = idCancelation;
     }
 
     public Date getCreatedAt() {
@@ -49,7 +49,7 @@ public class Cancellation {
     }
     @Override
 	public String toString() {
-		return "User [id=" + id + ", createdAt=" + createdAt.toString() + ", booking=" + booking.toString() +"]";
+		return "User [id=" + idCancelation + ", createdAt=" + createdAt.toString() + ", booking=" + booking.toString() +"]";
 	}   
 
 }
