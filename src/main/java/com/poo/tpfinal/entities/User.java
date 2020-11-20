@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Version;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 import java.util.Date;
 
@@ -15,18 +17,26 @@ public class User {
     private Long version;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@NotEmpty
 	@Column(name = "iduser")
 	private long idUser;
+	@Email
+    @NotEmpty
 	@Column(name = "email", nullable = false, length = 150)
 	private String email;
+    @NotEmpty
 	@Column(name = "password", nullable = false, length = 50)
 	private String password;
+    @NotEmpty
 	@Column(name = "firstname", nullable = true, length = 50)
 	private String firstName;
+	@NotEmpty
 	@Column(name = "lastname", nullable = true, length = 50)
 	private String lastName;
+	@NotEmpty
 	@Column(name = "birthdate", nullable = true)
 	private Date birthDate;
+	@NotEmpty
 	@Column(name = "nationality", nullable = true, length = 50)
 	private String nationality;
 		

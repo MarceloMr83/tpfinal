@@ -5,7 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Find deals on room and much more...</h1>
+	<h1>Ver habitaciones disponibles</h1>
 	<table>
 		<tr>
 			<th>Name</th>
@@ -21,13 +21,13 @@
 	<hr/>
 	<form th:action="@{/roomsAvailabilities}" method="post" enctype="multipart/form-data">
 		<div>
-			From: <input name="from" />
+			Desde: <input name="from" />
 		</div>
 		<div>
-			To: <input name="to" />
+			Hasta: <input name="to" />
 		</div>
 		<div>
-			Sleeps: <input name="sleeps" />
+			Ocupantes: <input name="sleeps" />
 		</div>
 		<div>
 			<input type="submit" value="Check availability" name="button"/>

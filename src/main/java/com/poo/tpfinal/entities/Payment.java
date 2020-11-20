@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
+import javax.validation.constraints.NotEmpty;
 import javax.persistence.JoinColumn;
 import java.util.Date;
 
@@ -15,16 +16,21 @@ public class Payment {
     @Version
     private Long version;
     @Id
+    @NotEmpty
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idPayment")
     private long idPayment;
+    @NotEmpty
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
+    @NotEmpty
     @OneToOne
     @JoinColumn(name = "idBooking", updatable = false, nullable = false)
     private Booking booking;
+    @NotEmpty
     @Column(name = "card", nullable = false)
     private String card;
+    @NotEmpty
     @Column(name = "cardNumber", nullable = false)
     private String cardNumber;
     

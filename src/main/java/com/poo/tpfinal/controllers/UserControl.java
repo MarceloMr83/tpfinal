@@ -1,6 +1,6 @@
 package com.poo.tpfinal.controllers;
 
-import java.util.List;
+/*import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.poo.tpfinal.entities.User;
-import com.poo.tpfinal.services.UserService;
+import com.poo.tpfinal.services.UserService;*/
 
 
-@RestController
+/*@RestController
 public class UserControl {
-	
+	/*
 	@Autowired
 	private UserService userService;
 
@@ -52,6 +52,6 @@ public class UserControl {
 	{  
 		return "Hello world";  
 	}  
-	
-}
+	*/
+//}
 

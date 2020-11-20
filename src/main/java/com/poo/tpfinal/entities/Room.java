@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Version;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Room {
@@ -13,16 +14,22 @@ public class Room {
     private Long version;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotEmpty
     @Column(name = "idroom")
     private long idRoom;
+    @NotEmpty
     @Column(name = "name", nullable = true, length = 50)
     private String name;
+    @NotEmpty
     @Column(name = "price", nullable = true, length = 10)
     private float price;
+    @NotEmpty
     @Column(name = "occupancy", nullable = false, length = 10)
     private int occupancy;
+    @NotEmpty
     @Column(name = "availability", nullable = false, length = 1)
     private int availability;
+    @NotEmpty
     @Column(name = "facilities", nullable = true, length = 50)
     private String facilities;
     

@@ -11,34 +11,45 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Booking {
     @Version
     private Long version;
     @Id
+    @NotEmpty
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idBooking")
     private long idBooking;
+    @NotEmpty
     @OneToOne
     @JoinColumn(name = "idUser", updatable = false, nullable = false)
     private User guest;
+    @NotEmpty
     @Column(name = "checkIn", nullable = false)
     private Date checkIn;
+    @NotEmpty
     @Column(name = "checkOut", nullable = false)
     private Date checkOut;
+    @NotEmpty
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
+    @NotEmpty
    @ManyToOne
    @JoinColumn(name = "idRoom", updatable = false, nullable = false)
-    private Room room;      
+    private Room room; 
+    @NotEmpty     
     @Column(name = "breakfastIncluded", nullable = false)
     private boolean breakfastIncluded;
+    @NotEmpty
     @Column(name = "parking", nullable = false)
     private boolean parking;
+    @NotEmpty
     @Column(name = "freeCancelation", nullable = false)
     private boolean freeCancelation;
-    @Column(name = "cost", nullable = true)
+    @NotEmpty
+    @Column(name = "cost", nullable = false)
     private float cost;
     
     //agregar @Version
