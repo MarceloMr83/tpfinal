@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
 import javax.validation.constraints.NotEmpty;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.JoinColumn;
 import java.util.Date;
 
@@ -21,6 +24,7 @@ public class Payment {
     @Column(name = "idPayment")
     private long idPayment;
     @NotEmpty
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
     @NotEmpty

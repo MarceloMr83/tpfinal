@@ -21,7 +21,8 @@ public class UserService {
 	}
 	
 	public void addUser(User user) {
-	    userRepository.save(user);
+		userRepository.save(user);
+		System.out.println(user.getEmail());
 	}
 	
 	public User getUser(Long id) {

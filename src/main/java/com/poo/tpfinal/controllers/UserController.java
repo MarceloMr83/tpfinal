@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 //import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.poo.tpfinal.entities.User;
 import com.poo.tpfinal.services.UserService;
@@ -27,14 +28,17 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/signup")
-    public String showSignUpForm() {
+    @GetMapping("/signup")
+    public String createProjectForm(Model model) {        
+         model.addAttribute("User", new User());
         return "signup";
     }
     
 	@PostMapping("/adduser")
     public String addUser(@Valid User user, BindingResult result, Model model) {
+        model.addAttribute("User", new User()); 
         if (result.hasErrors()) {
+            System.out.println(result.getAllErrors());
             return "signup";
 		}		
 		userService.addUser(user);
@@ -42,10 +46,9 @@ public class UserController {
         return "index";
 	}
 
-	/*
-	@GetMapping("/edit/{id}")
+/*	@GetMapping("/edit/{id}")
 public String showUpdateForm(@PathVariable("id") long id, Model model) {
-    User user = userRepository.findById(id)
+    User user = userService.findById(id)
       .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
     
     model.addAttribute("user", user);

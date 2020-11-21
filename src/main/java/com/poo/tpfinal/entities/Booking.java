@@ -13,6 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Version;
 import javax.validation.constraints.NotEmpty;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Booking {
     @Version
@@ -27,12 +29,15 @@ public class Booking {
     @JoinColumn(name = "idUser", updatable = false, nullable = false)
     private User guest;
     @NotEmpty
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(name = "checkIn", nullable = false)
     private Date checkIn;
     @NotEmpty
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(name = "checkOut", nullable = false)
     private Date checkOut;
     @NotEmpty
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
     @NotEmpty

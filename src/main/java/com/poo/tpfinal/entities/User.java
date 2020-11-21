@@ -9,6 +9,8 @@ import javax.persistence.Version;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 @Entity
@@ -16,7 +18,7 @@ public class User {
 	@Version
     private Long version;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@NotEmpty
 	@Column(name = "iduser")
 	private long idUser;
@@ -33,6 +35,7 @@ public class User {
 	@NotEmpty
 	@Column(name = "lastname", nullable = true, length = 50)
 	private String lastName;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	@NotEmpty
 	@Column(name = "birthdate", nullable = true)
 	private Date birthDate;
