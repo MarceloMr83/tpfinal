@@ -2,8 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Usuario nuevo</title>
- 
 <!-- Bootstrap CSS -->
 <link href="../static/css/bootstrap.css" rel="stylesheet"
  th:href="@{/css/bootstrap.css}">
@@ -13,8 +11,8 @@
   <br>
   <h2>
 Agregar usuario</h2>
-
 <form action="#" th:action="@{/adduser}" th:object="${User}" method="post">
+</table>
    <div class="form-group">
    <label for="firstName">Nombre</label> 
    <input type="text" class="form-control" id="firstName" th:field="*{firstName}" name="firstName">

@@ -18,17 +18,23 @@ public class UserService {
 
 	public List<User> retrieveAllUsers() {
 		return userRepository.findAll();
-	}
-	
+	}	
 	public void addUser(User user) {
 		userRepository.save(user);
-		System.out.println(user.getEmail());
 	}
 	
 	public User getUser(Long id) {
 	    return userRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
 	}
 	
+	public boolean getUserByEmail(String email) {
+	    return userRepository.findByEmail(email);
+	}
+
+	/*public User getUserLogin(String email,String password) {
+	    return userRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
+	}*/
+/*
 	public User replaceUser(User user, Long id) {
 		return userRepository.findById(id)
 	      .map(u -> {
@@ -41,7 +47,7 @@ public class UserService {
 	      .orElseGet(() -> {
 	        return userRepository.save(user);
 	      });
-	}
+	}*/
 
 	public void deleteUser(@PathVariable Long id) {
 		userRepository.deleteById(id);

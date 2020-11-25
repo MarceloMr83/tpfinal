@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns = "http://www.w3.org/1999/xhtml" xmlns:th = "http://www.thymeleaf.org"
+   xmlns:sec = "http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="UTF-8">
 <title>Iniciar sesion</title>
@@ -15,17 +16,17 @@
       <text>Iniciar Sesion</text>
     </h2>
 
-<form action="#" th:action="@{/login}" th:object="${User}" method="post">
-   <input type="hidden" th:field="*{id}" name="id" id="id">
 
+<form action="#" th:action="@{/login}" method="post">
+ 
    <div class="form-group">
    <label for="email">Usuario</label>
-   <input type="text" class="form-control" id="email" th:field="*{email}" name="email">
+   <input type="text" name="username" autofocus="autofocus">
    </div>  
 
    <div class="form-group">
    <label for="password">Contraseña</label> 
-   <input type="text" class="form-control" id="password" th:field="*{password}" name="password">
+   <input type="password" name="password">
    </div>
 
 <button type="submit" class="btn btn-success">Ingresar</button>

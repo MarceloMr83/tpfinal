@@ -6,9 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Version;
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -19,27 +19,32 @@ public class User {
     private Long version;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotEmpty
 	@Column(name = "iduser")
 	private long idUser;
+
+	@Valid
 	@Email
-    @NotEmpty
+	@NotEmpty(message = "{El email debe completarse}")
 	@Column(name = "email", nullable = false, length = 150)
 	private String email;
-    @NotEmpty
+	@Valid
+    @NotEmpty(message = "{El password debe completarse}")
 	@Column(name = "password", nullable = false, length = 50)
 	private String password;
-    @NotEmpty
+	@Valid
+    @NotEmpty(message = "{El nombre debe completarse}")
 	@Column(name = "firstname", nullable = true, length = 50)
 	private String firstName;
-	@NotEmpty
+	@Valid
+	@NotEmpty(message = "{El apellido debe completarse}")
 	@Column(name = "lastname", nullable = true, length = 50)
 	private String lastName;
+	@Valid
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	@NotEmpty
+
 	@Column(name = "birthdate", nullable = true)
 	private Date birthDate;
-	@NotEmpty
+	@Valid
 	@Column(name = "nationality", nullable = true, length = 50)
 	private String nationality;
 		

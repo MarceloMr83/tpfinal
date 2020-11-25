@@ -30,6 +30,9 @@ public class LoginController {
 
 	@RequestMapping(value="/login", method=RequestMethod.POST)
     public String login(@RequestParam String user, @RequestParam String password, Model model) {
+		
+
+
     	return "booking";
 	}
 	
