@@ -10,7 +10,7 @@ import com.poo.tpfinal.entities.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
 
-	boolean findByEmail(String email);
+	public User findByEmail(String email);
  
 	//el usuario existe o no
 /*	@Query("select u from User u where u.email = :email")

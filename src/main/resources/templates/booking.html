@@ -3,10 +3,13 @@
 <head> 
 	<title>Booking</title> 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title></title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
 	<h1>Ver habitaciones disponibles</h1>
-	<table>
+<table>
 		<tr th:each="room : ${availabilities}">
 			<td th:text="${room.name}"></td>
 			<td>
@@ -16,17 +19,34 @@
 	</table>
 	<hr/>
 	<form th:action="@{/roomsAvailabilities}" method="post" enctype="multipart/form-data">
-		<div>
-			Desde: <input name="from" />
+
+		<div class="form-group row">
+		<div class="col-xs-2">
+		  <label for="ex1">Desde</label>
+		  <input class="form-control" name="from" type="text"/>
+		</div>
+		<div class="col-xs-2">
+		  <label for="ex2">Hasta</label>
+		  <input class="form-control" id="to" type="text"/>
+		</div>
+		<div class="col-xs-2">
+		  <label for="ex3">Ocupantes</label>
+		  <input class="form-control" id="sleeps" type="text"/>
+		</div>
+	  </div>
+
+
+		<!--<div>
+			Desde: <input name="from" class="form-control"/>
 		</div>
 		<div>
-			Hasta: <input name="to" />
+			Hasta: <input name="to" class="form-control" />
 		</div>
 		<div>
-			Ocupantes: <input name="sleeps" />
-		</div>
+			Ocupantes: <input name="sleeps" class="form-control" />
+		</div>-->
 		<div>
-			<input type="submit" value="Check availability" name="button"/>
+			<button type="submit" class="btn btn-success">Buscar</button>
 		</div>
 	</form>
 </body>

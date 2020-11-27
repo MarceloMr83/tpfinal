@@ -1,7 +1,6 @@
 package com.poo.tpfinal.configuration;
-
 import javax.sql.DataSource;
-
+import com.poo.tpfinal.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +10,59 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
- 
+
+
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    UserService userDetailsService;
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        return bCryptPasswordEncoder;
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        
+    }
+
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .antMatchers("/bookingDetail").hasRole("USER")                
+                .and()
+                .formLogin();
+}
+
+
+
+
+    
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /*
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -24,15 +75,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**", "/js/**", "/images/**").permitAll()
                 .antMatchers("/adduser").permitAll()
                 .antMatchers("/signup").permitAll()
-                .antMatchers("/booking").authenticated()
-                .anyRequest().authenticated()
+                .antMatchers("/booking").permitAll()
+                .antMatchers("/bookingDetail").hasRole("USER")
+                .anyRequest().hasRole("USER")
                 .and()
                 .formLogin()
                 .and()
                 .logout()
                 .permitAll();
     }
-
+    @Override
+protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    auth
+        .userDetailsService(UserDetailsService)
+        .passwordEncoder(getPasswordEncoder());
+}
     @Autowired
     private DataSource dataSource;
 
@@ -40,15 +97,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
     }
-    
+ /*   
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().passwordEncoder(passwordEncoder())
             .dataSource(dataSource)
             .usersByUsernameQuery("select email,password,idUser from user where email=?")
-            .authoritiesByUsernameQuery(
-                    "SELECT email, 'ROLE_USER' FROM user WHERE email=?");
-    }
- 
-   
-}
+            .aut
+            /*.authoritiesByUsernameQuery(
+                    "SELECT email, 'ROLE_USER' FROM user WHERE email=?");*/
+        
+  //  }   */
+//}

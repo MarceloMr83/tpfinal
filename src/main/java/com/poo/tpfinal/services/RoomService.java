@@ -1,5 +1,6 @@
 package com.poo.tpfinal.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,10 @@ public class RoomService {
 		return roomRepository.findAll();
 	}
 	
+	public List<Room> retrieveAvailabilities(int occupancy,Date checkIn,Date checkOut) {
+		return roomRepository.findRoomsAvailability(occupancy, checkIn, checkOut);
+	}
+
 	public void addRoom(Room room) {
 	    roomRepository.save(room);
 	}
@@ -26,6 +31,7 @@ public class RoomService {
 	    return roomRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
 	}
 	
+	/*
 	public Room replaceRoom(Room room, Long id) {
 		return roomRepository.findById(id)
 	      .map(u -> {
@@ -39,10 +45,11 @@ public class RoomService {
 	        return roomRepository.save(room);
 	      });
 	}
-
+*/
+/*
 	public void deleteRoom(@PathVariable Long id) {
 		roomRepository.deleteById(id);
-	}
+	}*/
 	
 /*	public User findUserByUsername(String username) {
 		//return userRepository.findUserByUsername(username);

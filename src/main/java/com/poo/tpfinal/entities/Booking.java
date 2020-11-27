@@ -18,10 +18,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class Booking {
     @Version
-    private Long version;
+    private int version;
     @Id
     @NotEmpty
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idBooking")
     private long idBooking;
     @NotEmpty
@@ -57,12 +57,19 @@ public class Booking {
     @Column(name = "cost", nullable = false)
     private float cost;
     
-    //agregar @Version
+  
     public Booking(){
             super();
           //  listRoom=new ArrayList<Room>();
           }
     
+    public void setVersionNum(int version){
+            this.version=version;
+        }
+        
+     public int getVersionNum(){
+             return version; 
+            }
 
     public long getId() {
         return idBooking;

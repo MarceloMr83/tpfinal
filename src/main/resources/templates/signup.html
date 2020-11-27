@@ -7,12 +7,17 @@
  th:href="@{/css/bootstrap.css}">
 </head>
 <body>
+  
  <div class="container">
   <br>
   <h2>
 Agregar usuario</h2>
 <form action="#" th:action="@{/adduser}" th:object="${User}" method="post">
-</table>
+  
+<!--<p th:text=${mensaje}></p>-->
+
+<p th:text=${mensaje}></p>
+
    <div class="form-group">
    <label for="firstName">Nombre</label> 
    <input type="text" class="form-control" id="firstName" th:field="*{firstName}" name="firstName">
@@ -28,12 +33,12 @@ Agregar usuario</h2>
     <input type="text" class="form-control" id="birthDate" th:field="*{birthDate}" name="birthDate">
     </div>
 
-   <input type="hidden" th:field="*{id}" name="id" id="id">
-
-   <div class="form-group">
+    <div class="form-group">
    <label for="email">Email</label>
    <input type="text" class="form-control" id="email" th:field="*{email}" name="email">
-   </div>  
+   <span class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</span>
+
+  </div>  
 
    <div class="form-group">
    <label for="password">password</label> 
@@ -47,6 +52,12 @@ Agregar usuario</h2>
 
 
 <button type="submit" class="btn btn-success">Guardar</button>
+<button type="button" class="btn btn-primary" th:action="@{/}">Volver</button>
+<script>
+  function goBack() {
+    window.history.back();
+  }
+  </script>
   </form>
 </div>
 </body>

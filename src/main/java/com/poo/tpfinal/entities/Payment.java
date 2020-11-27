@@ -17,10 +17,10 @@ import java.util.Date;
 @Entity
 public class Payment {
     @Version
-    private Long version;
+    private int version;
     @Id
     @NotEmpty
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idPayment")
     private long idPayment;
     @NotEmpty
@@ -38,6 +38,15 @@ public class Payment {
     @Column(name = "cardNumber", nullable = false)
     private String cardNumber;
     
+
+    public void setVersionNum(int version){
+		this.version=version;
+	}
+	
+	public int getVersionNum(){
+		 return version; 
+		}
+
     public long getId() {
         return idPayment;
     }

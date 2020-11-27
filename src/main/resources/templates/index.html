@@ -38,7 +38,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 </head>
 <body>
-
+    
     <nav class="navbar navbar-inverse navbar-fixed-top">
 
         <div class="container-fluid">
@@ -60,13 +60,31 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
             <div class="collapse navbar-collapse" id="bs-site-navbar-collapse">
 
                 <ul class="nav navbar-nav navbar-right">
-                    <h1 th:inline = "text">Bienvenido [[${#httpServletRequest.remoteUser}]]</h1>
-                    <form th:action = "@{/logout}" method = "post">
-                       <input type = "submit" value = "Sign Out"/>  
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="/booking">Habitaciones disponibles</a></li>
-                    <li><a href="/loginView">Login de usuario</a></li>
-                    <li><a href="/signup">Registrarse</a></li>    
+                    <h1 th:inline = "text">Bienvenido</h1>
+                     <li class="nav-item">           
+                        <a class="btn btn-outline-light" th:href="@{/booking}">Ver disponibilidad</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="btn btn-outline-light" th:href="@{/bookingDetail}">Reservar</a>
+                    </li>
+
+                    <!--oculta el boton de login o de logout segun este logeado o no el usuario-->
+                    <li sec:authorize="!isAuthenticated()" class="nav-item">
+                        <a class="btn btn-outline-light" th:href="@{/signup}">Registrarse</a>
+                    </li>                   
+                    
+                    <li sec:authorize="!isAuthenticated()" class="nav-item">
+                        <a class="btn btn-outline-light" th:href="@{/login}">Login</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false" sec:authentication="name">
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-divider"></div>
+                            <a class="pl-3" th:href="@{/logout}">Logout</a>
+                        </div>
+                    </li>
                                   
                 </ul>
             </div><!-- /.navbar-collapse -->

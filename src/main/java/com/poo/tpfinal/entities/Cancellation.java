@@ -17,10 +17,10 @@ import java.util.Date;
 @Entity
 public class Cancellation {
     @Version
-    private Long version;
+    private int version;
     @Id
     @NotEmpty
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idCancelation")
     private long idCancelation;
     @NotEmpty
@@ -31,6 +31,14 @@ public class Cancellation {
     @OneToOne
     @JoinColumn(name = "idBooking", updatable = false, nullable = false)
     private Booking booking;
+
+    public void setVersionNum(int version){
+		this.version=version;
+	}
+	
+	public int getVersionNum(){
+		 return version; 
+		}
     
     public long getId() {
         return idCancelation;

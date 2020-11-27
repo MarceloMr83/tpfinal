@@ -18,6 +18,12 @@ public class BookingController {
         return "booking";
     }
     
+
+
+    @GetMapping("/bookingDetail")
+    public String showBookingDetail() {
+        return "booking-detail";
+    }
     
 	/*
 	@GetMapping("/edit/{id}")

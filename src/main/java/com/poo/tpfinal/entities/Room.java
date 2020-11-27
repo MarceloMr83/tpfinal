@@ -11,13 +11,13 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 public class Room {
     @Version
-    private Long version;
+    private int version;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotEmpty
     @Column(name = "idroom")
     private long idRoom;
-    @NotEmpty
+    @NotEmpty(message = "{El nombre debe completarse}")
     @Column(name = "name", nullable = true, length = 50)
     private String name;
     @NotEmpty
@@ -33,6 +33,13 @@ public class Room {
     @Column(name = "facilities", nullable = true, length = 50)
     private String facilities;
     
+    public void setVersionNum(int version){
+		this.version=version;
+	}
+	
+	public int getVersionNum(){
+		 return version; 
+		}
     public long getId() {
         return idRoom;
     }
@@ -86,6 +93,5 @@ public class Room {
 		return "User [idRoom=" + idRoom + ", name=" + name + ", price=" + price + ", occupancy=" +
 		 occupancy + ", availability=" + availability + ", facilities=" + facilities + "]";
 	}   
-
     
 }
