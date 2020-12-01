@@ -2,10 +2,8 @@ package com.poo.tpfinal.services;
 
 import java.util.Date;
 import java.util.List;
-import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import com.poo.tpfinal.entities.Room;
 import com.poo.tpfinal.repositories.RoomRepository;
 
@@ -15,6 +13,13 @@ public class RoomService {
 	@Autowired
 	private RoomRepository roomRepository;
 
+	public List<Room> retrieveAvailableRooms(Date from, Date to) {
+		return roomRepository.retrieveAvailableRooms(from, to);
+	}
+
+
+	
+/*
 	public List<Room> retrieveAllRooms() {
 		return roomRepository.findAll();
 	}
@@ -29,7 +34,7 @@ public class RoomService {
 	
 	public Room getRoom(Long id) {
 	    return roomRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
-	}
+	}*/
 	
 	/*
 	public Room replaceRoom(Room room, Long id) {

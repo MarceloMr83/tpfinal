@@ -10,7 +10,7 @@
 <body>
 	<h1>Ver habitaciones disponibles</h1>
 <table>
-		<tr th:each="room : ${availabilities}">
+		<tr th:each="room : ${rooms}">
 			<td th:text="${room.name}"></td>
 			<td>
 				<a th:href="@{/rooms/{id}(id=${room.id})}">Ver</a>
@@ -18,12 +18,14 @@
 		</tr>
 	</table>
 	<hr/>
-	<form th:action="@{/roomsAvailabilities}" method="post" enctype="multipart/form-data">
+	
+	<form th:action="@{/rooms/{from}/{to}(from=${from},to=${to})}" method="post" enctype="multipart/form-data">
 
+		
 		<div class="form-group row">
 		<div class="col-xs-2">
 		  <label for="ex1">Desde</label>
-		  <input class="form-control" name="from" type="text"/>
+		  <input class="form-control" name="from" id="from" type="text"/>
 		</div>
 		<div class="col-xs-2">
 		  <label for="ex2">Hasta</label>
