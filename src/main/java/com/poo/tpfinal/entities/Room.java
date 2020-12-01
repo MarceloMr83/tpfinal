@@ -15,7 +15,7 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotEmpty
-    @Column(name = "idroom")
+    @Column(name = "idRoom")
     private long idRoom;
     @NotEmpty(message = "{El nombre debe completarse}")
     @Column(name = "name", nullable = true, length = 50)

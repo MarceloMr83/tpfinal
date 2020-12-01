@@ -42,7 +42,7 @@ public class Booking {
     private Date createdAt;
     @NotEmpty
    @ManyToOne
-   @JoinColumn(name = "idRoom", updatable = false, nullable = false)
+   @JoinColumn(name = "room", updatable = false, nullable = false)
     private Room room; 
     @NotEmpty     
     @Column(name = "breakfastIncluded", nullable = false)

@@ -8,26 +8,18 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-	<h1>Ver habitaciones disponibles</h1>
-<table>
-		<tr th:each="room : ${availabilities}">
-			<td th:text="${room.name}"></td>
-			<td>
-				<a th:href="@{/rooms/{id}(id=${room.id})}">Ver</a>
-			</td>
-		</tr>
-	</table>
-	<hr/>
-	<form th:action="@{/roomsAvailabilities}" method="post" enctype="multipart/form-data">
+	<h1>Buscar habitaciones disponibles</h1>
+	
+	<form th:action="@{/rooms}" th:object="${rooms}" method="post" enctype="multipart/form-data">
 
 		<div class="form-group row">
 		<div class="col-xs-2">
 		  <label for="ex1">Desde</label>
-		  <input class="form-control" name="from" type="text"/>
+		  <input class="form-control" name="from" id="from" type="text"/>
 		</div>
 		<div class="col-xs-2">
 		  <label for="ex2">Hasta</label>
-		  <input class="form-control" id="to" type="text"/>
+		  <input class="form-control" name="from" id="to" type="text"/>
 		</div>
 		<div class="col-xs-2">
 		  <label for="ex3">Ocupantes</label>
@@ -35,16 +27,33 @@
 		</div>
 	  </div>
 
+	  <table class="table table-condensed table-sm">
+		<tr>
+			<th>
+				Habitacion
+			</th>
+			<th>
+				Precio
+			</th>
+			<th>
+				Capacidad
+			</th>
+			<th>
+				Servicios
+			</th>
+		</tr>
+		<tr th:each="room : ${listRooms}">
+			<td th:text="${room.name}"></td>
+			<td th:text="${room.price}"></td>
+			<td th:text="${room.occupancy}"></td>
+			<td th:text="${room.facilities}"></td>
+			<td>
 
-		<!--<div>
-			Desde: <input name="from" class="form-control"/>
-		</div>
-		<div>
-			Hasta: <input name="to" class="form-control" />
-		</div>
-		<div>
-			Ocupantes: <input name="sleeps" class="form-control" />
-		</div>-->
+				<!--<a th:href="@{/rooms/{id}(id=${room.idRoom})}">Ver</a>-->
+			</td>
+		</tr>
+	</table>
+		
 		<div>
 			<button type="submit" class="btn btn-success">Buscar</button>
 		</div>
