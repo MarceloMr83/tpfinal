@@ -17,6 +17,10 @@ public class RoomService {
 	public List<Room> retrieveAvailableRooms(Date from, Date to) {
 		return roomRepository.retrieveAvailableRooms(from, to);
 	}
+
+	/*public Room findRoom(Long id){
+		return roomRepository.
+	}*/
 	
 	
 }
