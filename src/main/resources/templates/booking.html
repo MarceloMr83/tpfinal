@@ -28,7 +28,7 @@
 	  </div>
 
 	  <div align="center"></div>
-	  <table class="table table-condensed table-sm">
+	  <table class="table table-dark">
 		<tr>
 			<th>
 				Habitacion
@@ -42,6 +42,9 @@
 			<th>
 				Servicios
 			</th>
+			<th>
+				Reservar
+			</th>
 		</tr>
 		<tr th:each="room : ${listRooms}">
 			<td th:text="${room.name}"></td>
@@ -49,7 +52,7 @@
 			<td th:text="${room.occupancy}"></td>
 			<td th:text="${room.facilities}"></td>
 			<td>
-				<!--<a th:href="@{/rooms/{id}(id=${room.idRoom})}">Ver</a>-->
+				<a th:href="@{/rooms/{id}(id=${room.idRoom})}">Reservar</a>
 			</td>
 		</tr>
 	</table>
