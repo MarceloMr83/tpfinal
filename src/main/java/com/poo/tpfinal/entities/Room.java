@@ -40,11 +40,11 @@ public class Room {
 	public int getVersionNum(){
 		 return version; 
 		}
-    public long getId() {
+    public long getIdRoom() {
         return idRoom;
     }
 
-    public void setId(long idRoom) {
+    public void setIdRoom(long idRoom) {
         this.idRoom = idRoom;
     }
 

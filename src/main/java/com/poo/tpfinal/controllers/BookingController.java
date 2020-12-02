@@ -13,11 +13,7 @@ public class BookingController {
 	@Autowired
 	private BookingService bookingService;
 
-	@GetMapping("/booking")
-    public String showBooking() {
-        return "booking";
-    }
-    
+	 
 
 
     @GetMapping("/bookingDetail")
