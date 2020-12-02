@@ -41,19 +41,19 @@ public class User implements UserDetails {
 	private String password;
 	@Valid
 	@NotEmpty(message = "{El nombre debe completarse}")
-	@Column(name = "firstname", nullable = true, length = 50)
+	@Column(name = "firstname", nullable = false, length = 50)
 	private String firstName;
 	@Valid
 	@NotEmpty(message = "{El apellido debe completarse}")
-	@Column(name = "lastname", nullable = true, length = 50)
+	@Column(name = "lastname", nullable = false, length = 50)
 	private String lastName;
 	@Valid
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 
-	@Column(name = "birthdate", nullable = true)
+	@Column(name = "birthdate", nullable = false)
 	private Date birthDate;
 	@Valid
-	@Column(name = "nationality", nullable = true, length = 50)
+	@Column(name = "nationality", nullable = false, length = 50)
 	private String nationality;
 
 	public long getId() {

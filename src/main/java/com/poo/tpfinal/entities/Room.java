@@ -21,7 +21,7 @@ public class Room {
     @Column(name = "name", nullable = true, length = 50)
     private String name;
     @NotEmpty
-    @Column(name = "price", nullable = true, length = 10)
+    @Column(name = "price", nullable = false, length = 10)
     private float price;
     @NotEmpty
     @Column(name = "occupancy", nullable = false, length = 10)
@@ -30,7 +30,7 @@ public class Room {
     @Column(name = "availability", nullable = false, length = 1)
     private int availability;
     @NotEmpty
-    @Column(name = "facilities", nullable = true, length = 50)
+    @Column(name = "facilities", nullable = false, length = 50)
     private String facilities;
     
     public void setVersionNum(int version){
