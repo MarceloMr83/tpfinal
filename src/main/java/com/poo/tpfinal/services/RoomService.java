@@ -15,10 +15,10 @@ public class RoomService {
 	@Autowired
 	private RoomRepository roomRepository;
 
-	public List<Room> retrieveAvailableRooms(Date from, Date to) {
-		return roomRepository.retrieveAvailableRooms(from, to);
+	public List<Room> retrieveAvailableRooms(Date from, Date to,String occupancy) {
+		return roomRepository.retrieveAvailableRooms(from, to, occupancy);
 	}
-
+	
 	public Optional<Room> findById(long id) {
 		return roomRepository.findById(id);
 	}

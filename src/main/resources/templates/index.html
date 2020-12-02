@@ -64,10 +64,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                      <li class="nav-item">           
                         <a class="btn btn-outline-light" th:href="@{/availability}">Ver disponibilidad</a>
                      </li>
-                     <li class="nav-item">
-                        <a class="btn btn-outline-light" th:href="@{/bookingDetail}">Reservar</a>
-                    </li>
-
                     <!--oculta el boton de login o de logout segun este logeado o no el usuario-->
                     <li sec:authorize="!isAuthenticated()" class="nav-item">
                         <a class="btn btn-outline-light" th:href="@{/signup}">Registrarse</a>

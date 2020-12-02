@@ -52,7 +52,8 @@
 			<td th:text="${room.occupancy}"></td>
 			<td th:text="${room.facilities}"></td>
 			<td>
-				<a th:href="@{/rooms/{id}(id=${room.idRoom})}">Reservar</a>
+				<a th:href="@{/bookingDetail/{id}(id=${room.idRoom})}">Reservar</a>
+				<button type="button" th:onclick="|window.location.href='/bookingDetail'|">Reservar</button>
 			</td>
 		</tr>
 	</table>
@@ -60,6 +61,7 @@
 		
 		<div>
 			<button type="submit" class="btn btn-success">Buscar</button>
+			<button type="button" class="btn btn-primary" th:onclick="|window.location.href='/'|"> Volver</button>
 		</div>
 	</form>
 </body>

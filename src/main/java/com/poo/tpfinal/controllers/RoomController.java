@@ -33,26 +33,24 @@ public class RoomController {
 
 	@PostMapping("/rooms")
 	 public String viewRooms(@RequestParam(name = "from", required= false)
-	  String fromDate,@RequestParam(name = "to", required = false) String toDate, Model model) {
+	  String fromDate,@RequestParam(name = "to", required = false) String toDate,@RequestParam(name = "sleeps", required = false) String occupancy,  Model model) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			Date from = dateFormat.parse(fromDate);
 			Date to = dateFormat.parse(toDate);
 
-			List<Room> listRooms = roomService.retrieveAvailableRooms(from, to);
+			List<Room> listRooms = roomService.retrieveAvailableRooms(from, to,occupancy);
 			model.addAttribute("listRooms", listRooms);
 
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		return "availability";
-
 	}
 
 
 	@GetMapping("/rooms/{id}")
 	public Optional<Room> setBooking(@PathVariable Long id) {
-		System.out.println("id room:"+id);
 		 roomService.findById(id);
 		 	Optional<Room> room = roomService.findById(id);
 		 return room;
