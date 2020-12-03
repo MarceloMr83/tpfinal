@@ -15,11 +15,11 @@
 		<div class="form-group row">
 		<div class="col-xs-2">
 		  <label for="ex1">Desde</label>
-		  <input class="form-control" name="from" type="text"/>
+		  <input class="form-control" name="from" th:attr="value = ${from}" type="text"/>
 		</div>
 		<div class="col-xs-2">
 		  <label for="ex2">Hasta</label>
-		  <input class="form-control" name="to" type="text"/>
+		  <input class="form-control" name="to" th:attr="value = ${to}" type="text"/> 
 		</div>
 		<div class="col-xs-2">
 		  <label for="ex3">Ocupantes</label>
@@ -28,7 +28,7 @@
 	  </div>
 
 	  <div align="center"></div>
-	  <table class="table table-dark">
+	  <table class="table table-sm">
 		<tr>
 			<th>
 				Habitacion
@@ -52,8 +52,11 @@
 			<td th:text="${room.occupancy}"></td>
 			<td th:text="${room.facilities}"></td>
 			<td>
-				<a th:href="@{/bookingDetail/{id}(id=${room.idRoom})}">Reservar</a>
-				<button type="button" th:onclick="|window.location.href='/bookingDetail'|">Reservar</button>
+				<!--<a th:href="@{/bookingDetail/{id}(id=${room.idRoom})/{from}(from=${from})}">Reservar</a>-->
+				<a th:href="@{/bookingDetail/{id}/{from}/{to}(id=${room.idRoom},from=${from},to=${to})}"><span>Reservar</span></a>
+
+
+				<!--<button type="button" th:onclick="|window.location.href='/bookingDetail'|">Reservar</button>-->
 			</td>
 		</tr>
 	</table>

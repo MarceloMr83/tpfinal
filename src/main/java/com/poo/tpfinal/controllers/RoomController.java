@@ -41,6 +41,8 @@ public class RoomController {
 
 			List<Room> listRooms = roomService.retrieveAvailableRooms(from, to,occupancy);
 			model.addAttribute("listRooms", listRooms);
+			model.addAttribute("from", fromDate);
+			model.addAttribute("to", toDate);
 
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -48,14 +50,14 @@ public class RoomController {
 		return "availability";
 	}
 
-
+/*
 	@GetMapping("/rooms/{id}")
 	public Optional<Room> setBooking(@PathVariable Long id) {
 		 roomService.findById(id);
 		 	Optional<Room> room = roomService.findById(id);
 		 return room;
 	}
-
+*/
 
 /*	@RequestMapping("/rooms")
 	 public String viewRooms(@RequestParam(name = "from", required= false)

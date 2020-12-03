@@ -19,8 +19,8 @@ public class RoomService {
 		return roomRepository.retrieveAvailableRooms(from, to, occupancy);
 	}
 	
-	public Optional<Room> findById(long id) {
-		return roomRepository.findById(id);
+	public Room findByIdRoom(long idRoom) {
+		return roomRepository.findByIdRoom(idRoom);
 	}
 
 	/*public Room findRoom(Long id){

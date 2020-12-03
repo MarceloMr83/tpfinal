@@ -92,6 +92,14 @@ public class Room {
 	public String toString() {
 		return "User [idRoom=" + idRoom + ", name=" + name + ", price=" + price + ", occupancy=" +
 		 occupancy + ", availability=" + availability + ", facilities=" + facilities + "]";
-	}   
+	}
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
     
 }

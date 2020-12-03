@@ -10,8 +10,39 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
+	<form th:action="@{/bookingConfirm}" th:object="${booking}" method="post" enctype="multipart/form-data">
 	<h1>Detalle de reserva</h1>
-	<!--Habitacion: <b th:text="${room.id}" /> <b th:text="${room.name}" />
+
+	Desde fecha<input readonly="readonly" type="text" th:field="*{checkIn}"" />
+	Hasta fecha<input readonly="readonly" type="text" th:field="*{checkOut}" />
+		
+	<table class="table table-sm">
+			<tr>
+				<td>
+					Habitacion: <b th:text="${id}" /> 
+				</td>
+			</tr>
+	</table>
+	
+	<table class="table table-sm">
+		<tr>
+			<td>
+				Desde fecha: <b th:text="${from}"></b>
+			</td>
+
+			<td>
+				Hasta fecha: <b th:text="${to}"></b>
+			</td>
+		</tr>
+	</table>
+
+
+
+
+
+	
+
+	<!--
 	
 	<form th:action="@{/room/{id}/bookings(id=${room.id})}" method="post" enctype="multipart/form-data" >
 			<div>
@@ -22,7 +53,12 @@
 			</div>
 			<div>
 				<input type="submit" value="Reserve" name="button"/>
-			</div>
-	</form>-->
+			</div>-->
+
+			<button type="submit" class="btn btn-success">Confirmar reserva</button>
+			<button type="button" class="btn btn-primary" th:onclick="|window.location.href='/'|"> Volver</button>
+	</form>
+	
+	
 </body>
 </html>
