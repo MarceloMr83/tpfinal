@@ -37,15 +37,15 @@ public class User implements UserDetails {
 	private String email;
 	@Valid
 	@NotEmpty(message = "{El password debe completarse}")
-	@Column(name = "password", nullable = false, length = 50)
+	@Column(name = "password", nullable = false, length = 60)
 	private String password;
 	@Valid
 	@NotEmpty(message = "{El nombre debe completarse}")
-	@Column(name = "firstname", nullable = false, length = 50)
+	@Column(name = "firstname", nullable = false, length = 45)
 	private String firstName;
 	@Valid
 	@NotEmpty(message = "{El apellido debe completarse}")
-	@Column(name = "lastname", nullable = false, length = 50)
+	@Column(name = "lastname", nullable = false, length = 45)
 	private String lastName;
 	@Valid
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -53,7 +53,7 @@ public class User implements UserDetails {
 	@Column(name = "birthdate", nullable = false)
 	private Date birthDate;
 	@Valid
-	@Column(name = "nationality", nullable = false, length = 50)
+	@Column(name = "nationality", nullable = false, length = 45)
 	private String nationality;
 
 	public long getId() {

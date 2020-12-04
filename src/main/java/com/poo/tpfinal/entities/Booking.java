@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -20,40 +21,40 @@ public class Booking {
     @Version
     private int version;
     @Id
-    @NotEmpty
+    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idBooking")
     private long idBooking;
-    @NotEmpty
-    @OneToOne
-    @JoinColumn(name = "idUser", updatable = false, nullable = false)
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "guest", updatable = false, nullable = false)
     private User guest;
-    @NotEmpty
+    @NotNull
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(name = "checkIn", nullable = false)
     private Date checkIn;
-    @NotEmpty
+    @NotNull
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(name = "checkOut", nullable = false)
     private Date checkOut;
-    @NotEmpty
+    @NotNull
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
-    @NotEmpty
-   @ManyToOne
+    @NotNull
+    @ManyToOne
    @JoinColumn(name = "room", updatable = false, nullable = false)
     private Room room; 
-    @NotEmpty     
+    @NotNull   
     @Column(name = "breakfastIncluded", nullable = false)
     private boolean breakfastIncluded;
-    @NotEmpty
+    @NotNull
     @Column(name = "parking", nullable = false)
     private boolean parking;
-    @NotEmpty
+    @NotNull
     @Column(name = "freeCancelation", nullable = false)
     private boolean freeCancelation;
-    @NotEmpty
+    @NotNull
     @Column(name = "cost", nullable = false)
     private float cost;
     

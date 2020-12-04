@@ -2,6 +2,8 @@ package com.poo.tpfinal.controllers;
 
 //import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,62 +15,128 @@ import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import com.poo.tpfinal.entities.Booking;
 import com.poo.tpfinal.entities.Room;
+import com.poo.tpfinal.entities.User;
 import com.poo.tpfinal.services.BookingService;
 import com.poo.tpfinal.services.RoomService;
 
 @Controller
 public class BookingController {
+
   @Autowired
   private BookingService bookingService;
-  private RoomService roomService;
 
+  @Autowired 
+  private RoomService roomService;
   
-	@GetMapping("/bookingDetail/{id}/{from}/{to}")
-public String showUpdateForm(@PathVariable("id") long idRoom,@PathVariable("from") String fromDate,@PathVariable("to") String toDate, Model model) {
+  
+  
+	@GetMapping("/bookingDetail/{id}/{from}/{to}/{name}/{price}/{occupancy}/{facilities}")
+public String showConfirmScreen(@PathVariable("id") Long idRoom,@PathVariable("from") String fromDate,
+@PathVariable("to") String toDate,@PathVariable("name") String name,@PathVariable("price") String price,
+@PathVariable("occupancy") String occupancy,@PathVariable("facilities") String facilities, Model model) {
     //User user = userRepository.findById(id)  .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
     //Optional<Room> room = roomService.findById(id);
-    System.out.println(idRoom); 
+      
+     // Booking booking = new Booking();
+      //booking.setRoom(room.get());
+     // System.out.println(room.get().getName());
+    //  booking.setCheckIn(checkIn);
+   //   booking.setCheckOut(checkOut);
+   //   booking.setCreatedAt(createdAt);
+      long daydiff=1;
+      //Room room = roomService.findById("4");
+      //System.out.println(room.getName());
+      model.addAttribute("idRoom", idRoom);
+      model.addAttribute("from", fromDate);
+      model.addAttribute("to", toDate);
+      model.addAttribute("name", name);
 
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    Date checkIn;
-    try {
-      checkIn = dateFormat.parse(fromDate);
-      Date checkOut = dateFormat.parse(toDate);
-      Date createdAt = new Date();  
-    //datos de habitacion    
-    // Room room = roomService.findByIdRoom(idRoom);
+      SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+      try {
+        Date from = dateFormat.parse(fromDate);
+        Date to = dateFormat.parse(toDate);
+        var diff = from.getTime() - to.getTime();   
+        daydiff = diff / (1000 * 60 * 60 * 24);
+        
+    } 
+    catch (ParseException e) {
+			e.printStackTrace();
+		}
+      
+    //Long precio = Long.parseLong(price) * daydiff;          
+      
 
+      model.addAttribute("price", price);
+      model.addAttribute("occupancy", occupancy);
+      model.addAttribute("facilities", facilities);
 
-   // Booking booking = new Booking();
-   // booking.setRoom(room);
-   // booking.setCheckIn(checkIn);
-    //booking.setCheckOut(checkOut);
-    //booking.setCreatedAt(createdAt);
-   // model.addAttribute("booking", booking);
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
-
-    /*model.addAttribute("id", id);
-    model.addAttribute("from", from);
-    model.addAttribute("to", to);
-    model.addAttribute("room", room);*/
-    
-    
-    return "booking-detail";
+  
+  return "booking-detail";
 }
 
+/*@PostMapping("/bookingDetail") public String bookingPreview(Model model) {
 
-@PostMapping("/bookingConfirm") public String viewRooms(Model model) {
+  return "booking-detail";
+
+  }
+*/
 
 
-    return "booking-detail";
+@PostMapping("/bookingConfirm") public String viewRooms(
+  @RequestParam(name = "from", required= false) String fromDate,
+  @RequestParam(name = "to", required = false) String toDate,
+  @RequestParam(name = "idRoom", required = false) String idRoom, 
+  @RequestParam(name = "price", required = false) String price, 
+  Model model)  {
+    //roomService.findById(idRoom);
+   // List<Room> listRooms = roomService.retrieveAvailableRooms(from, to,occupancy);
+System.out.println("idroom que viene:"+idRoom);
+    
+      Room room = roomService.findById(idRoom);
+      System.out.println(room.getName());
+   SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+   try {
+    Date checkIn = dateFormat.parse(fromDate);
+    Date checkOut = dateFormat.parse(toDate);
+    Date createdAt = new Date();
 
+    System.out.println(checkIn + " " + createdAt);
+
+    //List<Room> listRooms = roomService.retrieveAvailableRooms(from, to,"2");
+    //model.addAttribute("listRooms", listRooms);
+    model.addAttribute("from", fromDate);
+    model.addAttribute("to", toDate);
+
+    //crea la instancia del objeto reserva
+    Booking booking = new Booking();
+    booking.setRoom(room);
+    booking.setCheckIn(checkIn);
+    booking.setCheckOut(checkOut);
+    booking.setCreatedAt(createdAt);
+    //obtiene el objeto user como instancia de usuario logueado
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    User guest = (User) auth.getPrincipal();
+    booking.setGuest(guest);
+
+    bookingService.addBooking(booking);
+    
+  } catch (ParseException e) {
+    e.printStackTrace();
+  }
+    return "availability";
+
+
+
+
+
+    
     }
+
 
 
   /*

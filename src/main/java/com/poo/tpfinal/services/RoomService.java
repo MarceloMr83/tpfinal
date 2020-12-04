@@ -18,14 +18,11 @@ public class RoomService {
 	public List<Room> retrieveAvailableRooms(Date from, Date to,String occupancy) {
 		return roomRepository.retrieveAvailableRooms(from, to, occupancy);
 	}
-	
-	public Room findByIdRoom(long idRoom) {
-		return roomRepository.findByIdRoom(idRoom);
-	}
 
-	/*public Room findRoom(Long id){
-		return roomRepository.
-	}*/
-	
+
+
+	public Room findById(String id) {
+		return roomRepository.findByIdRoom(id);
+	}
 	
 }

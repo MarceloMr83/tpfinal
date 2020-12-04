@@ -10,21 +10,72 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-	<form th:action="@{/bookingConfirm}" th:object="${booking}" method="post" enctype="multipart/form-data">
+	<form th:action="@{/bookingConfirm}" method="post" th:object="${booking}" enctype="multipart/form-data">
 	<h1>Detalle de reserva</h1>
 
-	Desde fecha<input readonly="readonly" type="text" th:field="*{checkIn}"" />
-	Hasta fecha<input readonly="readonly" type="text" th:field="*{checkOut}" />
+	<!--Desde fecha<input readonly="readonly" type="text" th:field="*{checkIn}" />
+	Hasta fecha<input readonly="readonly" type="text" th:field="*{checkOut}" />-->
 		
 	<table class="table table-sm">
-			<tr>
-				<td>
-					Habitacion: <b th:text="${id}" /> 
-				</td>
+			
+			<!--<tr th:each="res : ${booking}">						
+				<td>Ingreso</td>
+				<td th:text="${res.checkIn}"></td>
+				<td>Salida </td>
+				<td th:text="${res.checkOut}"></td>
+				<td>Fecha de reserva</td>				 
+				<td th:text="${res.createdAt}"></td>
 			</tr>
-	</table>
-	
+			<tr>
+				
+			</tr>
+	</table>-->
+
 	<table class="table table-sm">
+		<tr>
+			<td>
+				      <input hidden name="idRoom" th:attr="value = ${idRoom}" type="text" readonly/>
+				Desde <input class="form-control" name="from" th:attr="value = ${from}" type="text" readonly/>
+			</td>
+		</tr>
+	
+		<tr>
+			<td>
+				Hasta <input class="form-control" name="to" th:attr="value = ${to}" type="text" readonly/>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				Habitacion <input class="form-control" name="name" th:attr="value = ${name}" type="text" readonly/>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				Precio <input class="form-control" name="price" th:attr="value = ${price}" type="text" readonly/>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				Capacidad <input class="form-control" name="occupancy" th:attr="value = ${occupancy}" type="text" readonly/>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				Comodidades <input class="form-control" name="facilities" th:attr="value = ${facilities}" type="text" readonly/>
+			</td>
+		</tr>
+
+	
+
+
+	</table>
+
+	
+	<!--<table class="table table-sm">
 		<tr>
 			<td>
 				Desde fecha: <b th:text="${from}"></b>
@@ -35,26 +86,37 @@
 			</td>
 		</tr>
 	</table>
+	<table class="table table-sm">
+		<tr>
+				<td>
+					Habitacion: <b th:text="${name}"></b>
+				</td>
+		</tr>
+
+		<tr>
+				<td>
+					Precio: <b th:text="${price}"></b>
+				</td>
+		</tr>
+
+		<tr>
+			<td>
+				Personas: <b th:text="${occupancy}"></b>
+			</td>
+	</tr>
+
+	<tr>
+		<td>
+			Comodidades: <b th:text="${facilities}"></b>
+		</td>
+</tr>
 
 
 
+	</table>-->
 
 
 	
-
-	<!--
-	
-	<form th:action="@{/room/{id}/bookings(id=${room.id})}" method="post" enctype="multipart/form-data" >
-			<div>
-				From: <input name="from" />
-			</div>
-			<div>
-				To: <input name="to" />
-			</div>
-			<div>
-				<input type="submit" value="Reserve" name="button"/>
-			</div>-->
-
 			<button type="submit" class="btn btn-success">Confirmar reserva</button>
 			<button type="button" class="btn btn-primary" th:onclick="|window.location.href='/'|"> Volver</button>
 	</form>

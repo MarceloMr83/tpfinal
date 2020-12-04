@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Version;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Room {
@@ -17,20 +18,19 @@ public class Room {
     @NotEmpty
     @Column(name = "idRoom")
     private long idRoom;
-    @NotEmpty(message = "{El nombre debe completarse}")
-    @Column(name = "name", nullable = true, length = 50)
+    @Column(name = "name", nullable = false)
     private String name;
-    @NotEmpty
-    @Column(name = "price", nullable = false, length = 10)
+    @NotNull
+    @Column(name = "price", nullable = false)
     private float price;
-    @NotEmpty
-    @Column(name = "occupancy", nullable = false, length = 10)
+    @NotNull
+    @Column(name = "occupancy", nullable = false)
     private int occupancy;
     @NotEmpty
-    @Column(name = "availability", nullable = false, length = 1)
+    @Column(name = "availability", nullable = false)
     private int availability;
     @NotEmpty
-    @Column(name = "facilities", nullable = false, length = 50)
+    @Column(name = "facilities", nullable = false)
     private String facilities;
     
     public void setVersionNum(int version){
