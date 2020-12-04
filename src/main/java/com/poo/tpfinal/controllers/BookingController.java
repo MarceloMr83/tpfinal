@@ -60,7 +60,7 @@ public String showConfirmScreen(@PathVariable("id") Long idRoom,@PathVariable("f
       try {
         Date from = dateFormat.parse(fromDate);
         Date to = dateFormat.parse(toDate);
-        var diff = from.getTime() - to.getTime();   
+        var diff = to.getTime() - from.getTime();   
         daydiff = diff / (1000 * 60 * 60 * 24);
         
     } 
@@ -68,34 +68,22 @@ public String showConfirmScreen(@PathVariable("id") Long idRoom,@PathVariable("f
 			e.printStackTrace();
 		}
       
-    //Long precio = Long.parseLong(price) * daydiff;          
-      
-
-      model.addAttribute("price", price);
-      model.addAttribute("occupancy", occupancy);
-      model.addAttribute("facilities", facilities);
-
+    float cost = Float.parseFloat(price) * daydiff;          
   
+      model.addAttribute("cost", cost);
+      model.addAttribute("occupancy", occupancy);
+      model.addAttribute("facilities", facilities);  
   return "booking-detail";
 }
-
-/*@PostMapping("/bookingDetail") public String bookingPreview(Model model) {
-
-  return "booking-detail";
-
-  }
-*/
-
 
 @PostMapping("/bookingConfirm") public String viewRooms(
   @RequestParam(name = "from", required= false) String fromDate,
   @RequestParam(name = "to", required = false) String toDate,
   @RequestParam(name = "idRoom", required = false) String idRoom, 
-  @RequestParam(name = "price", required = false) String price, 
+  @RequestParam(name = "cost", required = false) float cost, 
   Model model)  {
     //roomService.findById(idRoom);
    // List<Room> listRooms = roomService.retrieveAvailableRooms(from, to,occupancy);
-System.out.println("idroom que viene:"+idRoom);
     
       Room room = roomService.findById(idRoom);
       System.out.println(room.getName());
@@ -104,8 +92,6 @@ System.out.println("idroom que viene:"+idRoom);
     Date checkIn = dateFormat.parse(fromDate);
     Date checkOut = dateFormat.parse(toDate);
     Date createdAt = new Date();
-
-    System.out.println(checkIn + " " + createdAt);
 
     //List<Room> listRooms = roomService.retrieveAvailableRooms(from, to,"2");
     //model.addAttribute("listRooms", listRooms);
@@ -118,6 +104,7 @@ System.out.println("idroom que viene:"+idRoom);
     booking.setCheckIn(checkIn);
     booking.setCheckOut(checkOut);
     booking.setCreatedAt(createdAt);
+    booking.setCost(cost);
     //obtiene el objeto user como instancia de usuario logueado
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     User guest = (User) auth.getPrincipal();

@@ -26,7 +26,7 @@ public class Room {
     @NotNull
     @Column(name = "occupancy", nullable = false)
     private int occupancy;
-    @NotEmpty
+    @NotNull
     @Column(name = "availability", nullable = false)
     private int availability;
     @NotEmpty

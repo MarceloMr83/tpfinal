@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -19,15 +20,15 @@ public class Payment {
     @Version
     private int version;
     @Id
-    @NotEmpty
+    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idPayment")
     private long idPayment;
-    @NotEmpty
+    @NotNull
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
-    @NotEmpty
+    @NotNull
     @OneToOne
     @JoinColumn(name = "idBooking", updatable = false, nullable = false)
     private Booking booking;

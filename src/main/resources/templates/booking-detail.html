@@ -53,7 +53,7 @@
 
 		<tr>
 			<td>
-				Precio <input class="form-control" name="price" th:attr="value = ${price}" type="text" readonly/>
+				Costo total <input class="form-control" name="cost" th:attr="value = ${cost}" type="text" readonly/>
 			</td>
 		</tr>
 
@@ -68,57 +68,10 @@
 				Comodidades <input class="form-control" name="facilities" th:attr="value = ${facilities}" type="text" readonly/>
 			</td>
 		</tr>
-
-	
-
-
 	</table>
-
-	
-	<!--<table class="table table-sm">
-		<tr>
-			<td>
-				Desde fecha: <b th:text="${from}"></b>
-			</td>
-
-			<td>
-				Hasta fecha: <b th:text="${to}"></b>
-			</td>
-		</tr>
-	</table>
-	<table class="table table-sm">
-		<tr>
-				<td>
-					Habitacion: <b th:text="${name}"></b>
-				</td>
-		</tr>
-
-		<tr>
-				<td>
-					Precio: <b th:text="${price}"></b>
-				</td>
-		</tr>
-
-		<tr>
-			<td>
-				Personas: <b th:text="${occupancy}"></b>
-			</td>
-	</tr>
-
-	<tr>
-		<td>
-			Comodidades: <b th:text="${facilities}"></b>
-		</td>
-</tr>
-
-
-
-	</table>-->
-
-
 	
 			<button type="submit" class="btn btn-success">Confirmar reserva</button>
-			<button type="button" class="btn btn-primary" th:onclick="|window.location.href='/'|"> Volver</button>
+			<button type="button" class="btn btn-primary" th:onclick="|window.location.href='/availability'|"> Volver</button>
 	</form>
 	
 	
