@@ -14,11 +14,11 @@
 
 		<div class="form-group row">
 		<div class="col-xs-2">
-		  <label for="ex1">Desde</label>
+		  <label for="ex1">Desde (yyyy-mm-dd)</label>
 		  <input class="form-control" name="from" th:attr="value = ${from}" type="text"/>
 		</div>
 		<div class="col-xs-2">
-		  <label for="ex2">Hasta</label>
+		  <label for="ex2">Hasta (yyyy-mm-dd)</label>
 		  <input class="form-control" name="to" th:attr="value = ${to}" type="text"/> 
 		</div>
 		<div class="col-xs-2">
@@ -54,7 +54,6 @@
 			<td>
 
 				<a th:href="@{/bookingDetail/{id}/{from}/{to}/{name}/{price}/{occupancy}/{facilities}(id=${room.idRoom},from=${from},to=${to},name=${room.name},price=${room.price},occupancy=${room.occupancy},facilities=${room.facilities})}"><span>Reservar</span></a>
-				<!--<a th:href="@{/bookingDetail/{id}/{from}/{to}/{name}/{price}/{occupancy}/{facilities}(id=${room.idRoom},from=${from},to=${to},name=${room.name},price=${room.price},occupancy=${room.occupancy},facilities=${room.facilities})}"><span>Reservar</span></a>-->
 			</td>
 		</tr>
 	</table>

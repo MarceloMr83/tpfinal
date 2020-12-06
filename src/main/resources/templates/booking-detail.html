@@ -13,24 +13,6 @@
 	<form th:action="@{/bookingConfirm}" method="post" th:object="${booking}" enctype="multipart/form-data">
 	<h1>Detalle de reserva</h1>
 
-	<!--Desde fecha<input readonly="readonly" type="text" th:field="*{checkIn}" />
-	Hasta fecha<input readonly="readonly" type="text" th:field="*{checkOut}" />-->
-		
-	<table class="table table-sm">
-			
-			<!--<tr th:each="res : ${booking}">						
-				<td>Ingreso</td>
-				<td th:text="${res.checkIn}"></td>
-				<td>Salida </td>
-				<td th:text="${res.checkOut}"></td>
-				<td>Fecha de reserva</td>				 
-				<td th:text="${res.createdAt}"></td>
-			</tr>
-			<tr>
-				
-			</tr>
-	</table>-->
-
 	<table class="table table-sm">
 		<tr>
 			<td>
@@ -68,8 +50,7 @@
 				Comodidades <input class="form-control" name="facilities" th:attr="value = ${facilities}" type="text" readonly/>
 			</td>
 		</tr>
-	</table>
-	
+	</table>	
 			<button type="submit" class="btn btn-success">Confirmar reserva</button>
 			<button type="button" class="btn btn-primary" th:onclick="|window.location.href='/availability'|"> Volver</button>
 	</form>
