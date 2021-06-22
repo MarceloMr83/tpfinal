@@ -55,6 +55,7 @@ public String showConfirmScreen(@PathVariable("id") Long idRoom,@PathVariable("f
       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
       try {
         Date from = dateFormat.parse(fromDate);
+        System.out.println(from);
         Date to = dateFormat.parse(toDate);
         var diff = to.getTime() - from.getTime();   
         daydiff = diff / (1000 * 60 * 60 * 24);

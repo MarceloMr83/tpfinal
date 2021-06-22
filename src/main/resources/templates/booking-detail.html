@@ -50,6 +50,17 @@
 				Comodidades <input class="form-control" name="facilities" th:attr="value = ${facilities}" type="text" readonly/>
 			</td>
 		</tr>
+		<tr>
+			<td>
+				Cochera (adicional $200)<input class="form-control" name="parking" type="checkbox"/>
+			</td>
+			<td>
+				Desayuno (adicional $500)<input class="form-control" name="breakfastincluded" type="checkbox"/>
+			</td>
+			<td>
+				Cancelacion gratuita (adicional $100)<input class="form-control" name="freeCancelation" type="checkbox"/>
+			</td>
+		</tr>
 	</table>	
 			<button type="submit" class="btn btn-success">Confirmar reserva</button>
 			<button type="button" class="btn btn-primary" th:onclick="|window.location.href='/availability'|"> Volver</button>
