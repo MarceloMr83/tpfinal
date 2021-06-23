@@ -2,63 +2,65 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<!-- Bootstrap CSS -->
-<link href="../static/css/bootstrap.css" rel="stylesheet"
- th:href="@{/css/bootstrap.css}">
+<!-- Bootstrap CSS 
+<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">-->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 </head>
-<body>
-  
- <div class="container">
-  <br>
-  <h2>
-Agregar usuario</h2>
+<body>  
 <form action="#" th:action="@{/adduser}" th:object="${User}" method="post">
-  
-<!--<p th:text=${mensaje}></p>-->
-
 <p th:text=${mensaje}></p>
+  
+<div class="col-xs-4 col-md-offset-4 col-md-4">
+<h2>Registracion</h2>
+  <table class="table table-sm table-condensed">
+		<tr>
+			<td>
+        Nombre <input type="text" class="form-control" id="firstName" th:field="*{firstName}" name="firstName">
+      </td>
+    </tr>
 
-   <div class="form-group">
-   <label for="firstName">Nombre</label> 
-   <input type="text" class="form-control" id="firstName" th:field="*{firstName}" name="firstName">
-   </div>
+		<tr>
+			<td>
+       Apellido <input type="text" class="form-control" id="lastName" th:field="*{lastName}" name="lastName">
+      </td>
+    </tr>
    
-   <div class="form-group">
-    <label for="lastName">Apellido</label> 
-    <input type="text" class="form-control" id="lastName" th:field="*{lastName}" name="lastName">
-    </div>
+		<tr>
+			<td>
+        Fecha de nacimiento <input type="text" class="form-control" id="birthDate" th:field="*{birthDate}" name="birthDate">
+      </td>
+    </tr>
+   
+		<tr>
+			<td>
+        email <input type="text" class="form-control" id="email" th:field="*{email}" name="email">
+        <span class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</span>
+      </td>
+    </tr>
 
-    <div class="form-group">
-    <label for="birthDate">Fecha nacimiento(Formato: yyyy-mm-dd)</label> 
-    <input type="text" class="form-control" id="birthDate" th:field="*{birthDate}" name="birthDate">
-    </div>
+		<tr>
+			<td>
+        Password <input type="text" class="form-control" id="password" th:field="*{password}" name="password">
+      </td>
+    </tr>
+ 
+		<tr>
+			<td>   
+       Nacionalidad <input type="text" class="form-control" id="nationality" th:field="*{nationality}" name="nationality">
+      </td>
+    </tr>
+    
+    </table>  
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <button type="button" class="btn btn-primary" th:onclick="|window.location.href='/'|"> Volver</button>
+ </div>
 
-    <div class="form-group">
-   <label for="email">Email</label>
-   <input type="text" class="form-control" id="email" th:field="*{email}" name="email">
-   <span class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</span>
-
-  </div>  
-
-   <div class="form-group">
-   <label for="password">password</label> 
-   <input type="text" class="form-control" id="password" th:field="*{password}" name="password">
-   </div>
-
-   <div class="form-group">
-   <label for="nationality">Nacionalidad</label> 
-   <input type="text" class="form-control" id="nationality" th:field="*{nationality}" name="nationality">
-   </div>
-
-
-<button type="submit" class="btn btn-success">Guardar</button>
-<button type="button" class="btn btn-primary" th:onclick="|window.location.href='/'|"> Volver</button>
 <script>
   function goBack() {
     window.history.back();
   }
   </script>
+  
   </form>
-</div>
 </body>
 </html>
