@@ -10,7 +10,8 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-	<form th:action="@{/bookingConfirm}" method="post" th:object="${booking}" enctype="multipart/form-data">
+	<!--<form th:action="@{/bookingConfirm}" method="post" th:object="${booking}" enctype="multipart/form-data">-->
+	<form th:action="@{/payment}" method="post" th:object="${payment}" enctype="multipart/form-data">
 	<div class="col-xs-4 col-md-offset-4 col-md-4">
 	<h2>Detalle de reserva</h2>
 	<table class="table table-sm table-condensed">

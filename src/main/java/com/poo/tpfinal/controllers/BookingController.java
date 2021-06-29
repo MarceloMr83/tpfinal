@@ -28,9 +28,7 @@ public class BookingController {
 
   @Autowired 
   private RoomService roomService;
-  
-  
-  
+    
 	@GetMapping("/bookingDetail/{id}/{from}/{to}/{name}/{price}/{occupancy}/{facilities}")
 public String showConfirmScreen(@PathVariable("id") Long idRoom,@PathVariable("from") String fromDate,
 @PathVariable("to") String toDate,@PathVariable("name") String name,@PathVariable("price") String price,
@@ -52,7 +50,9 @@ public String showConfirmScreen(@PathVariable("id") Long idRoom,@PathVariable("f
       model.addAttribute("to", toDate);
       model.addAttribute("name", name);
 
-      SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+      System.out.println(fromDate);
+
+      SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
       try {
         Date from = dateFormat.parse(fromDate);
         System.out.println(from);
@@ -84,7 +84,7 @@ public String showConfirmScreen(@PathVariable("id") Long idRoom,@PathVariable("f
     
       Room room = roomService.findById(idRoom);
       System.out.println(room.getName());
-   SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+   SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
    try {
     Date checkIn = dateFormat.parse(fromDate);
     Date checkOut = dateFormat.parse(toDate);

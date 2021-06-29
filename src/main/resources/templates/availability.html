@@ -1,68 +1,61 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head> 
-	<title>Booking</title> 
+	<title>Reservas</title> 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <title></title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+ 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet"	href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+	<!--incluir funciones javascript desde un archivo en la carpeta static-->
+	<script type="text/javascript" th:src="@{/js/functions.js}"></script>
+	<script>$( function() {
+    $( "#from" ).datepicker();
+	$( "#to" ).datepicker();
+} );
+</script>
 </head>
 <body>
-	<h1>Buscar habitaciones disponibles</h1>
-	
 	<form th:action="@{/rooms}" th:object="${rooms}" method="post" enctype="multipart/form-data">
-
-		<div class="form-group row">
-		<div class="col-xs-2">
-		  <label for="ex1">Desde (yyyy-mm-dd)</label>
-		  <input class="form-control" name="from" th:attr="value = ${from}" type="text"/>
-		</div>
-		<div class="col-xs-2">
-		  <label for="ex2">Hasta (yyyy-mm-dd)</label>
-		  <input class="form-control" name="to" th:attr="value = ${to}" type="text"/> 
-		</div>
-		<div class="col-xs-2">
-		  <label for="ex3">Ocupantes</label>
-		  <input class="form-control" name="sleeps" type="text"/>
-		</div>
-	  </div>
-
-	  <div align="center"></div>
-	  <table class="table table-sm">
-		<tr>
-			<th>
-				Habitacion
-			</th>
-			<th>
-				Precio diario
-			</th>
-			<th>
-				Capacidad
-			</th>
-			<th>
-				Servicios
-			</th>
-			<th>
-				Reservar
-			</th>
-		</tr>
-		<tr th:each="room : ${listRooms}">
-			<td th:text="${room.name}"></td>
-			<td th:text="${room.price}"></td>
-			<td th:text="${room.occupancy}"></td>
-			<td th:text="${room.facilities}"></td>
-			<td>
-
-				<a th:href="@{/bookingDetail/{id}/{from}/{to}/{name}/{price}/{occupancy}/{facilities}(id=${room.idRoom},from=${from},to=${to},name=${room.name},price=${room.price},occupancy=${room.occupancy},facilities=${room.facilities})}"><span>Reservar</span></a>
-			</td>
-		</tr>
-	</table>
-</div>
-		
-		<div>
+			<div>	
+			<h2>Buscar habitaciones disponibles</h2>	  
+			Desde <input class="form-control" id="from" name="from" autocomplete="off" readonly='readonly' th:attr="value = ${from}" type="text"/>	
+		  	Hasta <input class="form-control" id="to" name="to" autocomplete="off" readonly='readonly' th:attr="value = ${to}" type="text"/>		
+		  	Ocupantes <input class="form-control" name="sleeps" type="text"/>
+	  		<table class="table table-sm">
+					<tr>
+						<th>
+							Habitacion
+						</th>
+						<th>
+							Precio diario
+						</th>
+						<th>
+							Capacidad
+						</th>
+						<th>
+							Servicios
+						</th>
+						<th>
+							Reservar
+						</th>
+					</tr>
+					<tr th:each="room : ${listRooms}">
+						<td th:text="${room.name}"></td>
+						<td th:text="${room.price}"></td>
+						<td th:text="${room.occupancy}"></td>
+						<td th:text="${room.facilities}"></td>
+					<td>
+						<a th:href="@{/bookingDetail/{id}/{from}/{to}/{name}/{price}/{occupancy}/{facilities}(id=${room.idRoom},from=${from},to=${to},name=${room.name},price=${room.price},occupancy=${room.occupancy},facilities=${room.facilities})}"><span>Reservar</span></a>
+					</td>
+				</tr>
+			</table>
 			<button type="submit" class="btn btn-success">Buscar</button>
 			<button type="button" class="btn btn-primary" th:onclick="|window.location.href='/'|"> Volver</button>
-		</div>
+		</div>			
 	</form>
 </body>
 </html>

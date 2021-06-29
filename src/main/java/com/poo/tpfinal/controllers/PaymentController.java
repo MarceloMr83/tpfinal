@@ -12,22 +12,22 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import com.poo.tpfinal.entities.Room;
-import com.poo.tpfinal.services.RoomService;
+import com.poo.tpfinal.entities.Payment;
+import com.poo.tpfinal.services.PaymentService;
 
 @Controller
-public class RoomController {
+public class PaymentController {
 
 	@Autowired
-	private RoomService roomService;
+	private PaymentService paymentService;
 
 
-	@GetMapping("/availability")
+	@GetMapping("/payment")
     public String showBooking() {
-        return "availability";
+        return "payment";
     }
 
-	@PostMapping("/rooms")
+	/*@PostMapping("/rooms")
 	 public String viewRooms(@RequestParam(name = "from", required= false)
 	  String fromDate,@RequestParam(name = "to", required = false) String toDate,@RequestParam(name = "sleeps", required = false) String occupancy,  Model model) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -51,8 +51,8 @@ public class RoomController {
 		 roomService.findById(id);
 		 	Optional<Room> room = roomService.findById(id);
 		 return room;
-	}
-*/
+	}*/
+
 
 
 
