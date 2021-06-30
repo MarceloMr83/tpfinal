@@ -11,26 +11,19 @@
 <p th:text=${mensaje}></p>
   
 <div class="col-xs-2 col-md-offset-2 col-md-2">
-<h2>Registracion</h2>
+<h2>Pago de reserva</h2>
   <table class="table table-sm table-condensed">
 		<tr>
 			<td>
-        Nombre <input type="text" class="form-control" id="card" th:field="*{card}" name="card">
+        Tarjeta <input type="text" class="form-control" id="card" th:field="*{card}" name="card">
       </td>
     </tr>
 
 		<tr>
 			<td>
-       Apellido <input type="text" class="form-control" id="cardNumber" th:field="*{cardNumber}" name="cardNumber">
+       Numero <input type="text" class="form-control" id="cardNumber" th:field="*{cardNumber}" name="cardNumber">
       </td>
-    </tr>
-   
-		<tr>
-			<td>
-        Fecha de nacimiento <input type="text" class="form-control" id="birthDate" th:field="*{birthDate}" name="birthDate">
-      </td>
-    </tr>
-     
+       
     </table>  
     <button type="submit" class="btn btn-success">Confirmar pago</button>
     <button type="button" class="btn btn-primary" th:onclick="|window.location.href='/'|"> Cancelar</button>
