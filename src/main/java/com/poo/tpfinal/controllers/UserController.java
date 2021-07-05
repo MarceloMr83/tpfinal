@@ -3,6 +3,7 @@ package com.poo.tpfinal.controllers;
 //import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -26,7 +27,7 @@ public class UserController {
     }
     
     @GetMapping("/signup")
-    public String createProjectForm(Model model) {        
+    public String signUp(Model model) {        
          model.addAttribute("User", new User());
         return "signup";
     }
@@ -34,7 +35,6 @@ public class UserController {
 	@PostMapping("/adduser")
     public String addUser(@Valid User user, BindingResult result, Model model) { 
         model.addAttribute("User", new User());
-
         User existing = userService.getUserByEmail(user.getEmail());
     if (existing!=null) {
            result.rejectValue("email", null, "El usuario ya se encuentra registrado");    }   
@@ -47,8 +47,28 @@ public class UserController {
         userService.addUser(user);
         model.addAttribute("users", userService.retrieveAllUsers());
         return "index";
-    }        
-        
+    }         
+   
+
+    @GetMapping("/login")
+    public String login(Model model, String error, String logout) {
+        if (error != null)
+            model.addAttribute("error", "El nombre de usuario o la contraseña no son validos");
+
+        if (logout != null)
+            model.addAttribute("message", "Sesion cerrada correctamente");
+
+        return "login";
+    }
+
+    @GetMapping("/logout")
+    public void logout(Model model, String error, String logout) {
+        SecurityContextHolder.clearContext();
+        if (logout != null)
+            model.addAttribute("message", "Sesion cerrada correctamente");
+        //return "logout";
+    }
+
         
       
     

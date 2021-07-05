@@ -38,34 +38,25 @@ public class UserService implements UserDetailsService {
 		return userRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
 	}
 
+
+
 	public User getUserByEmail(String email) {
 		return userRepository.findByEmail(email);
 	}
-
-	/*
-	 * public User getUserLogin(String email,String password) { return
-	 * userRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
-	 * }
-	 */
-	/*
-	 * public User replaceUser(User user, Long id) { return
-	 * userRepository.findById(id) .map(u -> { u.setEmail(user.getEmail());
-	 * u.setPassword(user.getPassword()); u.setFirstName(user.getFirstName());
-	 * u.setLastName(user.getLastName()); return userRepository.save(u); })
-	 * .orElseGet(() -> { return userRepository.save(user); }); }
-	 */
-
+	
 	public void deleteUser(@PathVariable Long id) {
 		userRepository.deleteById(id);
 	}
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		return userRepository.findByEmail(email);
+		User user = userRepository.findByEmail(email);
+		if(user == null){
+			throw new UsernameNotFoundException("username " + email
+                + " not found");
+		}
+		return user;
 	}
 	
-/*	public User findUserByUsername(String username) {
-		//return userRepository.findUserByUsername(username);
-	}*/
 	
 }

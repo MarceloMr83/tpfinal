@@ -35,12 +35,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/bookingDetail/**").hasRole("USER")                
                 .and()
-                .formLogin();
+                .formLogin()
+                .loginPage("/login").
+                and().
+                logout()
+                .logoutSuccessUrl("/logout.html");
 }
-
-
-
-
     
 
 }
