@@ -8,7 +8,7 @@
   </head>
 
   <body>
-    <div class="container col-xs-2 col-md-offset-2 col-md-2">
+    <div class="container col-xs-4 col-md-offset-4 col-md-4">
       <form class="form-signin" method="POST" th:action="@{/login}">
         <h2 class="form-heading">Sesion cerrada correctamente</h2>
 
@@ -16,7 +16,7 @@
             <span th:text="${mensaje}"></span>
             <span class="has-error" th:text="${error}"></span>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <h4 class="text-center"><a href="/index">Volver a la pagina</a></h4>
+            <button type="button" class="btn btn-primary" th:onclick="|window.location.href='/'|"> Volver</button>
         </div>
       </form>
     </div>

@@ -3,15 +3,14 @@ package com.poo.tpfinal.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import com.poo.tpfinal.entities.Payment;
 import com.poo.tpfinal.services.PaymentService;
 
@@ -28,41 +27,20 @@ public class PaymentController {
     }*/
 
 	@PostMapping("/payment")
-    public String createProjectForm(Model model) {        
+    public String payment(Payment payment,@RequestParam(name = "card", required= false)
+	String card,@RequestParam(name = "cardNumber", required = false) String cardNumber,  Model model) { {    
+		//pasa el objeto payment al html    
          model.addAttribute("Payment", new Payment());
-        return "payment";
+		 ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		 HttpSession session = attributes.getRequest().getSession(true);
+		 Date createdAt = new Date(); 
+		 payment.setCreatedAt(createdAt);
+		 session.setAttribute("payment", payment);
+        return "/bookingConfirm";
     }
-	/*@PostMapping("/rooms")
-	 public String viewRooms(@RequestParam(name = "from", required= false)
-	  String fromDate,@RequestParam(name = "to", required = false) String toDate,@RequestParam(name = "sleeps", required = false) String occupancy,  Model model) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-		try {
-			Date from = dateFormat.parse(fromDate);
-			Date to = dateFormat.parse(toDate);
-			
-			List<Room> listRooms = roomService.retrieveAvailableRooms(from, to,occupancy);
-			model.addAttribute("listRooms", listRooms);
-			model.addAttribute("from", fromDate);
-			model.addAttribute("to", toDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return "availability";
-	}
-
-/*
-	@GetMapping("/rooms/{id}")
-	public Optional<Room> setBooking(@PathVariable Long id) {
-		 roomService.findById(id);
-		 	Optional<Room> room = roomService.findById(id);
-		 return room;
-	}*/
-
-
-
-
 
 	
 	
+	}	
 }
 

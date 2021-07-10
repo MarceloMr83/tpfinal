@@ -9,18 +9,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import com.poo.tpfinal.entities.Booking;
+import com.poo.tpfinal.entities.Payment;
 import com.poo.tpfinal.entities.Room;
 import com.poo.tpfinal.entities.User;
 import com.poo.tpfinal.services.BookingService;
 import com.poo.tpfinal.services.RoomService;
 
 @Controller
+@SessionAttributes("booking")
 public class BookingController {
 
   @Autowired
@@ -30,123 +37,96 @@ public class BookingController {
   private RoomService roomService;
     
 	@GetMapping("/bookingDetail/{id}/{from}/{to}/{name}/{price}/{occupancy}/{facilities}")
-public String showConfirmScreen(@PathVariable("id") Long idRoom,@PathVariable("from") String fromDate,
-@PathVariable("to") String toDate,@PathVariable("name") String name,@PathVariable("price") String price,
-@PathVariable("occupancy") String occupancy,@PathVariable("facilities") String facilities, Model model) {
-    //User user = userRepository.findById(id)  .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-    //Optional<Room> room = roomService.findById(id);
-      
-     // Booking booking = new Booking();
-      //booking.setRoom(room.get());
-     // System.out.println(room.get().getName());
-    //  booking.setCheckIn(checkIn);
-   //   booking.setCheckOut(checkOut);
-   //   booking.setCreatedAt(createdAt);
+  public String showConfirmScreen(@PathVariable("id") String idRoom,@PathVariable("from") String fromDate,
+  @PathVariable("to") String toDate,@PathVariable("name") String name,@PathVariable("price") String price,
+  @PathVariable("occupancy") String occupancy,@PathVariable("facilities") String facilities, Model model) {
       long daydiff=1;
-      //Room room = roomService.findById("4");
-      //System.out.println(room.getName());
+       //crea la instancia del objeto reserva
+       Booking booking = new Booking();
+
+       //agregar los datos a la vista previa de la reserva
       model.addAttribute("idRoom", idRoom);
       model.addAttribute("from", fromDate);
       model.addAttribute("to", toDate);
       model.addAttribute("name", name);
 
-      System.out.println(fromDate);
-
       SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+      //formatea las fecha desde y hasta y la agrega la reserva
       try {
+        Date createdAt = new Date(); 
+        booking.setCreatedAt(createdAt);   
         Date from = dateFormat.parse(fromDate);
-        System.out.println(from);
         Date to = dateFormat.parse(toDate);
         var diff = to.getTime() - from.getTime();   
         daydiff = diff / (1000 * 60 * 60 * 24);
-        
-    } 
-    catch (ParseException e) {
-			e.printStackTrace();
-		}
+
+        //atributos del objeto reserva
+        booking.setCheckIn(from);
+        booking.setCheckOut(to);
+
+        //mostrar en la vista previa 
+        model.addAttribute("from", fromDate);
+        model.addAttribute("to", toDate);        
+      } 
+      catch (ParseException e) {
+			  e.printStackTrace();
+		  }        
       
-    float cost = Float.parseFloat(price) * daydiff;          
-  
+      float cost = Float.parseFloat(price) * daydiff; 
+
+      //mostrar en la vista previa 
       model.addAttribute("cost", cost);
       model.addAttribute("occupancy", occupancy);
-      model.addAttribute("facilities", facilities);  
+      model.addAttribute("facilities", facilities);
+
+      Room room = roomService.findById(idRoom);
+
+      //obtiene el objeto user como instancia de usuario logueado
+      Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+      User guest = (User) auth.getPrincipal();
+    
+      booking.setGuest(guest);
+      booking.setRoom(room);
+      booking.setCost(cost);
+
+      //agrega en la sesion el objeto booking
+      ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+      HttpSession session = attributes.getRequest().getSession(true);  
+      session.setAttribute("booking", booking);    
   return "booking-detail";
 }
 
-@PostMapping("/bookingConfirm") public String viewRooms(
-  @RequestParam(name = "from", required= false) String fromDate,
-  @RequestParam(name = "to", required = false) String toDate,
-  @RequestParam(name = "idRoom", required = false) String idRoom, 
-  @RequestParam(name = "cost", required = false) float cost, 
-  Model model)  {
-    //roomService.findById(idRoom);
-   // List<Room> listRooms = roomService.retrieveAvailableRooms(from, to,occupancy);
-    
-      Room room = roomService.findById(idRoom);
-      System.out.println(room.getName());
-   SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-   try {
-    Date checkIn = dateFormat.parse(fromDate);
-    Date checkOut = dateFormat.parse(toDate);
-    Date createdAt = new Date();
-
-    //List<Room> listRooms = roomService.retrieveAvailableRooms(from, to,"2");
-    //model.addAttribute("listRooms", listRooms);
-    model.addAttribute("from", fromDate);
-    model.addAttribute("to", toDate);
-
-    //crea la instancia del objeto reserva
-    Booking booking = new Booking();
-    booking.setRoom(room);
-    booking.setCheckIn(checkIn);
-    booking.setCheckOut(checkOut);
-    booking.setCreatedAt(createdAt);
-    booking.setCost(cost);
-    //obtiene el objeto user como instancia de usuario logueado
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    User guest = (User) auth.getPrincipal();
-    booking.setGuest(guest);
-
-    bookingService.addBooking(booking);
-    
-  } catch (ParseException e) {
-    e.printStackTrace();
+//guardar la reserva
+@PostMapping("/bookingConfirm") public String saveBooking(Model model)  {
+    //session para pasar informacion entre controladores
+    ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+      HttpSession session = attributes.getRequest().getSession(true);
+      //cast a objeto booking 
+      Booking booking =  (Booking) session.getAttribute("booking");
+      Payment payment = (Payment) session.getAttribute("payment");      
+      bookingService.addBooking(booking);   
+      return "availability";    
   }
-    return "availability";
-
-
-
-
-
-    
-    }
-
-
+  
 
   /*
+  
   @PostMapping("/bookingConfirm")
-  public String viewRooms(@RequestParam(name = "from", required = false) String fromDate,
-      @RequestParam(name = "to", required = false) String toDate,
-      @RequestParam(name = "idRoom", required = false) Long idRoom, Model model) {
-
-
+  public String viewRooms(Model model) {
     Booking booking = new Booking();
-
-
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-    Room room = roomService.findByIdRoom(idRoom);
-
-    Principal principal;
+   // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+   // Room room = roomService.findByIdRoom(idRoom);
+  // Principal principal;
 
      model.addAttribute("room",room);
      model.addAttribute("from", fromDate);
      model.addAttribute("to", toDate);
      //model.addAttribute("principal", principal);
+ 
 
    return "booking-detail";
- }*/
-
+ }
+*/
   
   /*
   

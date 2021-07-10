@@ -4,31 +4,27 @@
 	<title>Reservas</title> 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<!--librerias jquery para el calendario y fuciones desde el lado del cliente-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
- 	<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>-->
 	<link rel="stylesheet"	href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 	<!--incluir funciones javascript desde un archivo en la carpeta static-->
 	<script type="text/javascript" th:src="@{/js/functions.js}"></script>
-	<script>$( function() {
-    $( "#from" ).datepicker();
-	$( "#to" ).datepicker();
-} );
-</script>
 </head>
 <body>
 	<form th:action="@{/rooms}" th:object="${rooms}" method="post" enctype="multipart/form-data">
-		<div class="col-xs-4 col-md-offset-4 col-md-4">
+		<div class="col-xs-2 col-md-offset-4 col-md-4">
 			<h2>Buscar habitaciones disponibles</h2>	  
 	  		<table class="table table-sm table-condensed">
 				<tr>
 					<td>
 						Desde <input class="form-control" id="from" name="from" autocomplete="off" readonly='readonly' th:attr="value = ${from}" type="text"/>	
 					</td>
+				</tr>
+				<tr>
 					<td>
 						Hasta <input class="form-control" id="to" name="to" autocomplete="off" readonly='readonly' th:attr="value = ${to}" type="text"/>		
 					</td>

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<!-- Bootstrap CSS 
-<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">-->
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
-</head>
-<body>  
-<form action="#" th:action="@{/payment}" th:object="${Payment}" method="post">
-<p th:text=${mensaje}></p>
+  <head>
+  <meta charset="UTF-8">
+    <!-- Bootstrap CSS 
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+  </head>
+  <body>  
+  <form action="#" th:action="@{/payment}" th:object="${Payment}" method="post">
+    <p th:text=${mensaje}></p>
   
-<div class="col-xs-2 col-md-offset-2 col-md-2">
+<div class="col-xs-2 col-md-offset-4 col-md-4">
 <h2>Pago de reserva</h2>
   <table class="table table-sm table-condensed">
 		<tr>
@@ -18,23 +18,14 @@
         Tarjeta <input type="text" class="form-control" id="card" th:field="*{card}" name="card">
       </td>
     </tr>
-
 		<tr>
 			<td>
        Numero <input type="text" class="form-control" id="cardNumber" th:field="*{cardNumber}" name="cardNumber">
-      </td>
-       
+      </td>       
     </table>  
     <button type="submit" class="btn btn-success">Confirmar pago</button>
     <button type="button" class="btn btn-primary" th:onclick="|window.location.href='/'|"> Cancelar</button>
  </div>
-
-<script>
-  function goBack() {
-    window.history.back();
-  }
-  </script>
-  
   </form>
 </body>
 </html>

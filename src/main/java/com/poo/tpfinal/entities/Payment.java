@@ -1,7 +1,9 @@
 package com.poo.tpfinal.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +31,7 @@ public class Payment {
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
     @NotNull
-    @OneToOne
+    @OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "idBooking", updatable = false, nullable = false)
     private Booking booking;
     @NotEmpty
@@ -39,7 +41,6 @@ public class Payment {
     @Column(name = "cardNumber", nullable = false)
     private String cardNumber;
     
-
     public void setVersionNum(int version){
 		this.version=version;
 	}

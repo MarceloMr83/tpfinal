@@ -38,8 +38,6 @@ public class UserService implements UserDetailsService {
 		return userRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
 	}
 
-
-
 	public User getUserByEmail(String email) {
 		return userRepository.findByEmail(email);
 	}
@@ -52,8 +50,8 @@ public class UserService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		User user = userRepository.findByEmail(email);
 		if(user == null){
-			throw new UsernameNotFoundException("username " + email
-                + " not found");
+			throw new UsernameNotFoundException("El usuario " + email
+                + " no existe");
 		}
 		return user;
 	}
