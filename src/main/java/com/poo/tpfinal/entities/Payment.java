@@ -15,28 +15,46 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+
 import java.util.Date;
 
 @Entity
 public class Payment {
     @Version
     private int version;
+
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idPayment")
     private long idPayment;
+
     @NotNull
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
+
     @NotNull
-    @OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "idBooking", updatable = false, nullable = false)
+   /*@OneToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "idBooking", updatable = false, nullable = false)*/
+   // @OneToOne
+    //@OneToOne(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "id", referencedColumnName = "idBooking")
+   // @OneToOne(cascade = {CascadeType.ALL})
+    //@JoinColumn(name = "idBooking")
+    //@OneToOne(fetch=FetchType.LAZY,cascade={CascadeType.ALL},optional=false)}
+   // @MapsId 
+   /* @OneToOne
+    @JoinColumn(name = "idPayment")*/
+    @OneToOne
+    @JoinColumn(name="booking")
     private Booking booking;
+
     @NotEmpty
     @Column(name = "card", nullable = false)
     private String card;
+
     @NotEmpty
     @Column(name = "cardNumber", nullable = false)
     private String cardNumber;

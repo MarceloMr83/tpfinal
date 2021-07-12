@@ -2,13 +2,16 @@ package com.poo.tpfinal.entities;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
@@ -23,38 +26,54 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idBooking")
     private long idBooking;
+
     @NotNull
     @ManyToOne
     @JoinColumn(name = "guest", updatable = false, nullable = false)
     private User guest;
+
     @NotNull
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(name = "checkIn", nullable = false)
     private Date checkIn;
+
     @NotNull
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(name = "checkOut", nullable = false)
     private Date checkOut;
+
     @NotNull
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(name = "createdAt", nullable = false)
     private Date createdAt;
+
     @NotNull
     @ManyToOne
    @JoinColumn(name = "room", updatable = false, nullable = false)
-    private Room room; 
+    private Room room;
+
     @NotNull   
     @Column(name = "breakfastIncluded", nullable = false)
     private boolean breakfastIncluded;
+
     @NotNull
     @Column(name = "parking", nullable = false)
     private boolean parking;
+
     @NotNull
     @Column(name = "freeCancelation", nullable = false)
     private boolean freeCancelation;
+    
     @NotNull
     @Column(name = "cost", nullable = false)
     private float cost;
+
+    @OneToOne(mappedBy = "booking",cascade = CascadeType.ALL)
+    private Payment payment;
+
+
+   /* @OneToOne(mappedBy = "booking", fetch = FetchType.LAZY)
+    private Payment payment;*/
     
   
     public Booking(){

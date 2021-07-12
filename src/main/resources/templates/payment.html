@@ -7,7 +7,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
   </head>
   <body>  
-  <form action="#" th:action="@{/payment}" th:object="${Payment}" method="post">
+  <form action="#" th:action="@{/paymentConfirm}" method="post">
     <p th:text=${mensaje}></p>
   
 <div class="col-xs-2 col-md-offset-4 col-md-4">
@@ -15,15 +15,15 @@
   <table class="table table-sm table-condensed">
 		<tr>
 			<td>
-        Tarjeta <input type="text" class="form-control" id="card" th:field="*{card}" name="card">
+        Tarjeta <input type="text" class="form-control" id="card" name="card">
       </td>
     </tr>
 		<tr>
 			<td>
-       Numero <input type="text" class="form-control" id="cardNumber" th:field="*{cardNumber}" name="cardNumber">
+       Numero <input type="text" class="form-control" id="cardNumber" name="cardNumber">
       </td>       
     </table>  
-    <button type="submit" class="btn btn-success">Confirmar pago</button>
+    <button type="submit" class="btn btn-success">Confirmar</button>
     <button type="button" class="btn btn-primary" th:onclick="|window.location.href='/'|"> Cancelar</button>
  </div>
   </form>

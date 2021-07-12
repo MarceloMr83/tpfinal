@@ -17,14 +17,14 @@ public class PaymentService {
 	@Autowired
 	private PaymentRepository paymentRepository;
 
-	/*public List<Payment> retrieveAvailableRooms(Date from, Date to,String occupancy) {
-		return paymentRepository.retrieveAvailableRooms(from, to, occupancy);
+	public void addPayment(Payment payment) {
+	    paymentRepository.save(payment);
+	}	
+
+/*	public Payment addPayment(){
+
+		retur
 	}
 */
 
-/*
-	public Room findById(String id) {
-	//	return roomRepository.findByIdRoom(id);
-	}
-	*/
 }
