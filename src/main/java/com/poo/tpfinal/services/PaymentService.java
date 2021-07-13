@@ -6,11 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.poo.tpfinal.entities.Booking;
 import com.poo.tpfinal.entities.Payment;
-import com.poo.tpfinal.entities.Room;
 import com.poo.tpfinal.repositories.PaymentRepository;
-import com.poo.tpfinal.repositories.RoomRepository;
-
 @Service
 public class PaymentService {
 
@@ -21,10 +19,14 @@ public class PaymentService {
 	    paymentRepository.save(payment);
 	}	
 
-/*	public Payment addPayment(){
-
-		retur
+public Payment newPayment(String card,String cardNumber,Booking booking){
+		Payment payment = new Payment();
+		 Date createdAt = new Date(); 
+		 payment.setCreatedAt(createdAt);
+		 payment.setCard(card);
+		 payment.setCardNumber(cardNumber);		 
+		 payment.setBooking(booking);
+		return payment;
 	}
-*/
 
 }

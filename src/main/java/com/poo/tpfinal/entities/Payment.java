@@ -1,9 +1,7 @@
 package com.poo.tpfinal.entities;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,8 +13,6 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
-
 import java.util.Date;
 
 @Entity
@@ -36,17 +32,6 @@ public class Payment {
     private Date createdAt;
 
     @NotNull
-   /*@OneToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idBooking", updatable = false, nullable = false)*/
-   // @OneToOne
-    //@OneToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "id", referencedColumnName = "idBooking")
-   // @OneToOne(cascade = {CascadeType.ALL})
-    //@JoinColumn(name = "idBooking")
-    //@OneToOne(fetch=FetchType.LAZY,cascade={CascadeType.ALL},optional=false)}
-   // @MapsId 
-   /* @OneToOne
-    @JoinColumn(name = "idPayment")*/
     @OneToOne
     @JoinColumn(name="booking")
     private Booking booking;

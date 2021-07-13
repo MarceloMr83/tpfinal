@@ -10,7 +10,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.poo.tpfinal.entities.Booking;
 import com.poo.tpfinal.entities.Room;
@@ -55,39 +54,57 @@ public class BookingService {
 	public void deleteBooking(@PathVariable Long id) {
 		bookingRepository.deleteById(id);
 	}
+	
 
-	public Booking newBooking(String idRoom,String fromDate,String toDate,String price){
+	//costo del valor de la habitacion en dias de reserva
+	public float calculateCost(String fromDate,String toDate,String price){
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		long daydiff=1;
+	   //formatea las fecha desde y hasta y la agrega la reserva
+	   try {
+		 Date from = dateFormat.parse(fromDate);
+		 Date to = dateFormat.parse(toDate);
+		 var diff = to.getTime() - from.getTime();  
+		 //entrada y salida el mismo dia se cobra como un dia
+		 if(diff ==0 ) {
+			 diff=1;
+		 }
+		 daydiff = diff / (1000 * 60 * 60 * 24); 
+	   } 
+	   catch (ParseException e) {
+			   e.printStackTrace();
+		   }	   
+	   return Float.parseFloat(price) * daydiff;  
+	}
+
+	//crea la instancia de la reserva
+	public Booking newBooking(String idRoom,String fromDate,String toDate,float cost,boolean parking,boolean breakfastIncluded,boolean freeCancelation){
 		//crea la instancia del objeto reserva
 		Booking booking = new Booking(); 
 	   SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-	   //formatea las fecha desde y hasta y la agrega la reserva
 	   try {
 		 Date createdAt = new Date(); 
 		 booking.setCreatedAt(createdAt);   
 		 Date from = dateFormat.parse(fromDate);
 		 Date to = dateFormat.parse(toDate);
-		 var diff = to.getTime() - from.getTime();   
-		 daydiff = diff / (1000 * 60 * 60 * 24); 
 		 booking.setCheckIn(from);
 		 booking.setCheckOut(to);
 	   } 
 	   catch (ParseException e) {
 			   e.printStackTrace();
 		   }	   
-	   float cost = Float.parseFloat(price) * daydiff;  
 	   //mostrar en la vista previa  
 	   Room room = roomService.findById(idRoom);
- 
 	   //obtiene el objeto user como instancia de usuario logueado
 	   Authentication auth = SecurityContextHolder.getContext().getAuthentication();	   
 	   //todo - convertir en DTO objeto user
-	   User guest = (User) auth.getPrincipal();
-	 
+	   User guest = (User) auth.getPrincipal();	 
 	   booking.setGuest(guest);
 	   booking.setRoom(room);
 	   booking.setCost(cost);
+	   booking.setBreakfastIncluded(breakfastIncluded);
+	   booking.setParking(parking);
+	   booking.setFreeCancelation(freeCancelation);
  		return booking;
 	}
-	
 }

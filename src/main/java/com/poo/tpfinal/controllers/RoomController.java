@@ -40,7 +40,7 @@ public class RoomController {
 			model.addAttribute("from", fromDate);
 			model.addAttribute("to", toDate);
 		} catch (ParseException e) {
-			e.printStackTrace();
+			model.addAttribute("mensaje","Por favor ingrese las fechas de ingreso y egreso de la reserva");
 		}
 		return "availability";
 	}

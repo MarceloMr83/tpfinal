@@ -13,7 +13,7 @@
         <h2 class="form-heading">Ingreso al sistema</h2>
 
         <div class="form-group">
-            <span th:text="${mensaje}"></span>
+            <p style=color:#FF0000; th:text=${mensaje}></p>
             <input name="username" type="text" class="form-control" placeholder="Username" autofocus="true"/>
             <input name="password" type="password" class="form-control" placeholder="Password"/>
             <span class="has-error" th:text="${error}"></span>

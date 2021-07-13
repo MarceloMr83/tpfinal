@@ -31,6 +31,14 @@ $(document).ready(function(){
 		$("#to").datepicker({
 			minDate: 0
 		});	  
+
+		$("#birthDate").datepicker({
+			maxDate: 0,
+			changeYear: true,
+			yearRange: "1930:2010"
+		});
+
+		
 	});
 
 	$('#parking').mousedown(function() {

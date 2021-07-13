@@ -14,7 +14,8 @@
 	<script type="text/javascript" th:src="@{/js/functions.js}"></script>
 </head>
 <body>
-	<form th:action="@{/payment}" method="post" th:object="${booking}" enctype="multipart/form-data">
+	<!--recibe -->
+	<form th:action="@{/payment}" method="post" enctype="multipart/form-data">
 	<div class="col-xs-2 col-md-offset-4 col-md-4">
 	<h2>Detalle de reserva</h2>
 	<table class="table table-sm table-condensed">
@@ -61,11 +62,11 @@
 		</tr>
 		<tr>
 			<td>
-				Desayuno (adicional $500)<input class="form-control" name="breakfastincluded" id="breakfastIncluded" type="checkbox"/>
+				Desayuno (adicional $500)<input class="form-control" name="breakfastIncluded" id="breakfastIncluded"  type="checkbox"/>
 			</td>
 		</tr>
 			<td>
-				Cancelacion gratuita (adicional $100)<input class="form-control" name="freeCancelation" id="freeCancelation" type="checkbox"/>
+				Cancelacion gratuita (adicional $100)<input class="form-control" name="freeCancelation" id="freeCancelation"  type="checkbox"/>
 			</td>
 		</tr>
 		<tr>

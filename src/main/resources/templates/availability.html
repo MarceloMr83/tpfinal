@@ -17,23 +17,13 @@
 <body>
 	<form th:action="@{/rooms}" th:object="${rooms}" method="post" enctype="multipart/form-data">
 		<div class="col-xs-2 col-md-offset-4 col-md-4">
-			<h2>Buscar habitaciones disponibles</h2>	  
+			<h2>Buscar habitaciones disponibles</h2>						
+					Desde <input class="form-control" id="from" name="from" autocomplete="off" readonly='readonly' th:attr="value = ${from}" type="text"/>	
+					Hasta <input class="form-control" id="to" name="to" autocomplete="off" readonly='readonly' th:attr="value = ${to}" type="text"/>		
+					<p style=color:#FF0000; th:text=${mensaje}></p>
+					Ocupantes <input class="form-control" name="sleeps" type="text"/>
+
 	  		<table class="table table-sm table-condensed">
-				<tr>
-					<td>
-						Desde <input class="form-control" id="from" name="from" autocomplete="off" readonly='readonly' th:attr="value = ${from}" type="text"/>	
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Hasta <input class="form-control" id="to" name="to" autocomplete="off" readonly='readonly' th:attr="value = ${to}" type="text"/>		
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Ocupantes <input class="form-control" name="sleeps" type="text"/>
-					</td>
-				</tr>
 				<tr>
 					<th>
 						Habitacion

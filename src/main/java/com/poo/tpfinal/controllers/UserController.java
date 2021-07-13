@@ -39,7 +39,6 @@ public class UserController {
     if (existing!=null) {
            result.rejectValue("email", null, "El usuario ya se encuentra registrado");    }   
         if (result.hasErrors()) {
-            //model.addAttribute("error", result.getAllErrors());
             model.addAttribute("mensaje", result.getAllErrors());
             model.addAttribute("User", user);           
             return "signup";
@@ -49,7 +48,6 @@ public class UserController {
         return "index";
     }         
    
-
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
         if (error != null)

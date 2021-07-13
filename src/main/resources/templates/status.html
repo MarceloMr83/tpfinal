@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+  <meta charset="UTF-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+  </head>
+  <body>  
+    <form action="#">
+      <div class="col-xs-2 col-md-offset-4 col-md-4">
+        <h2>Resultado de reserva</h2>
+        <p style=color:#FF0000; th:text=${mensaje}></p>
+        <button type="button" class="btn btn-primary" th:onclick="|window.location.href='/'|"> Volver</button>
+      </div>
+    </form>
+  </body>
+</html>
