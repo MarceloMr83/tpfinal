@@ -29,13 +29,15 @@
       </tr>
 		  <tr>
 			  <td>
-          Fecha de nacimiento <input type="text" class="form-control" autocomplete="off" readonly="readonly" id="birthDate" th:field="*{birthDate}"  name="birthDate">
+          Fecha de nacimiento <input type="text" class="form-control" autocomplete="off" readonly="readonly" id="birth" name="birth">
+          <!--como crea directmante el objeto,input escondido para mostrar la fecha en formato dd-mm-yyy y guardarla en yyyy-mm-dd-->
+          <input type="hidden" class="form-control" id="birthDateHidden" th:field="*{birthDate}"  name="birthDateHidden">
         </td>
       </tr>
 		  <tr>
 			  <td>
           email <input type="text" class="form-control" id="email" th:field="*{email}" name="email">
-          <span class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</span>
+          <!--<span class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</span>-->
         </td>
       </tr>
 		  <tr>

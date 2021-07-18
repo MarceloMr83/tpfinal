@@ -25,12 +25,11 @@ public class PaymentController {
 	private BookingService bookingService;
 
 	@PostMapping("/payment")
-	public String payment(@RequestParam(name = "idRoom", required= true) String idRoom,@RequestParam(name = "from", required= true)	String from,
+	public String payment(@RequestParam(name = "idRoom", required= true) Long idRoom,@RequestParam(name = "from", required= true)	String from,
 	@RequestParam(name = "to", required= true) String to,@RequestParam(name = "cost", required= false) float cost,@RequestParam(name = "parking", required= false)
 	 boolean parking,@RequestParam(name = "breakfastIncluded", required= false) boolean breakfastIncluded,@RequestParam(name = "freeCancelation", required= false)
 	 boolean freeCancelation){
 		 //crea la instancia de booking y sigue a confirmar el pago
-		 System.out.println("fecha from"+from);
 		 Booking booking = bookingService.newBooking(idRoom, from, to, cost, parking, breakfastIncluded, freeCancelation);
 		 ServletRequestAttributes request = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 		HttpSession session = request.getRequest().getSession(true);
@@ -40,22 +39,16 @@ public class PaymentController {
 
 	@PostMapping("/paymentConfirm")
     public String paymentConfirm(@RequestParam(name = "card", required= false)
-	String card,@RequestParam(name = "cardNumber", required = false) String cardNumber,  Model model) { {    
+	String card,@RequestParam(name = "cardNumber", required = false) String cardNumber,  Model model){    
 		 ServletRequestAttributes request = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 		 //trae el booking creado en el otro controlador
 		 HttpSession session = request.getRequest().getSession(true);
 		 Booking booking = (Booking) session.getAttribute("booking");
 		 //crea la tabla hija payment
-		 Payment payment = paymentService.newPayment(card, cardNumber, booking);
-		
-		 
+		 Payment payment = paymentService.newPayment(card, cardNumber, booking);		 
 		 bookingService.addBooking(booking);
 		 paymentService.addPayment(payment);	 
         return "status";
-    }
-
-	
-	
 	}	
 }
 

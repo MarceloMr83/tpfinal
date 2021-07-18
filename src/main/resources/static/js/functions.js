@@ -23,7 +23,7 @@ $(document).ready(function(){
 	};
 	$.datepicker.setDefaults($.datepicker.regional['es']);
 
-	//deshabilitar los disa anteriores del calendario
+	//deshabilitar los dias anteriores del calendario
 	$(function() {
 		$("#from").datepicker({
 			minDate: 0
@@ -32,15 +32,28 @@ $(document).ready(function(){
 			minDate: 0
 		});	  
 
-		$("#birthDate").datepicker({
+	//fecha de nacimiento
+		var startDate = new Date(1930, 1, 1);
+		$("#birth").datepicker({
 			maxDate: 0,
 			changeYear: true,
-			yearRange: "1930:2010"
+			yearRange: "1930:2010",
+			dateFormat: 'dd-mm-yy',
+			//convierte a formato yy-mm-dd
+			onSelect: function() {
+				var fecha=$(this).val();
+				var res = fecha.split("-");
+				var dia=res[0];
+				var mes=res[1];
+				var year=res[2];		
+				var dateTwo = (year + "-" + mes + "-" + dia); //Year, Month, Date
+				$("#birthDateHidden").val(dateTwo);
+			}
 		});
-
 		
 	});
 
+	//checkbox de parking, breakfast y cancelation
 	$('#parking').mousedown(function() {
 		if (!$(this).is(':checked')) {
 			total=total + 200;

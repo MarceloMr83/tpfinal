@@ -15,6 +15,7 @@ import com.poo.tpfinal.entities.Booking;
 import com.poo.tpfinal.entities.Room;
 import com.poo.tpfinal.entities.User;
 import com.poo.tpfinal.repositories.BookingRepository;
+import com.poo.tpfinal.utils.DateFormater;
 
 @Service
 public class BookingService {
@@ -55,50 +56,43 @@ public class BookingService {
 		bookingRepository.deleteById(id);
 	}
 	
-
 	//costo del valor de la habitacion en dias de reserva
 	public float calculateCost(String fromDate,String toDate,String price){
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		long daydiff=1;
 	   //formatea las fecha desde y hasta y la agrega la reserva
-	   try {
-		 Date from = dateFormat.parse(fromDate);
-		 Date to = dateFormat.parse(toDate);
+	   //convertir fecha dd-mm-yyyy a yyyy-mm-dd
+		DateFormater dateFormat = new DateFormater();
+		 Date from = dateFormat.getDate(fromDate);
+		 Date to = dateFormat.getDate(toDate);
 		 var diff = to.getTime() - from.getTime();  
 		 //entrada y salida el mismo dia se cobra como un dia
 		 if(diff ==0 ) {
 			 diff=1;
 		 }
-		 daydiff = diff / (1000 * 60 * 60 * 24); 
-	   } 
-	   catch (ParseException e) {
-			   e.printStackTrace();
-		   }	   
+		 daydiff = diff / (1000 * 60 * 60 * 24);    
 	   return Float.parseFloat(price) * daydiff;  
 	}
 
 	//crea la instancia de la reserva
-	public Booking newBooking(String idRoom,String fromDate,String toDate,float cost,boolean parking,boolean breakfastIncluded,boolean freeCancelation){
+	public Booking newBooking(Long idRoom,String fromDate,String toDate,float cost,boolean parking,boolean breakfastIncluded,boolean freeCancelation){
 		//crea la instancia del objeto reserva
 		Booking booking = new Booking(); 
-	   SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-	   try {
-		 Date createdAt = new Date(); 
-		 booking.setCreatedAt(createdAt);   
-		 Date from = dateFormat.parse(fromDate);
-		 Date to = dateFormat.parse(toDate);
-		 booking.setCheckIn(from);
-		 booking.setCheckOut(to);
-	   } 
-	   catch (ParseException e) {
-			   e.printStackTrace();
-		   }	   
+		//convertir fecha dd-mm-yyyy a yyyy-mm-dd
+		DateFormater dateFormat = new DateFormater();
+		Date createdAt = new Date(); 
+		booking.setCreatedAt(createdAt);	   
+		Date from = dateFormat.getDate(fromDate) ;
+		Date to = dateFormat.getDate(toDate);
+		booking.setCheckIn(from);
+		booking.setCheckOut(to);
+		  
 	   //mostrar en la vista previa  
 	   Room room = roomService.findById(idRoom);
 	   //obtiene el objeto user como instancia de usuario logueado
 	   Authentication auth = SecurityContextHolder.getContext().getAuthentication();	   
 	   //todo - convertir en DTO objeto user
 	   User guest = (User) auth.getPrincipal();	 
+	    booking.setCreatedAt(createdAt);
 	   booking.setGuest(guest);
 	   booking.setRoom(room);
 	   booking.setCost(cost);
@@ -107,4 +101,9 @@ public class BookingService {
 	   booking.setFreeCancelation(freeCancelation);
  		return booking;
 	}
+
+	public List<Booking> getAllUserBookings(String guest){
+		return bookingRepository.retrieveAllUserBookings(guest);
+	}
+
 }

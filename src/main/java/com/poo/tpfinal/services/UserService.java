@@ -50,11 +50,8 @@ public class UserService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		User user = userRepository.findByEmail(email);
 		if(user == null){
-			throw new UsernameNotFoundException("El usuario " + email
-                + " no existe");
+			throw new UsernameNotFoundException("El usuario " + email + " no existe");
 		}
 		return user;
-	}
-	
-	
+	}	
 }

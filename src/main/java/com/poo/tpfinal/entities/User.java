@@ -31,28 +31,33 @@ public class User implements UserDetails {
 	private long idUser;
 
 	@Valid
-	@Email
-	@NotEmpty(message = "{El email debe completarse}")
+	@Email(message = "Ingrese una direcicon de email valida")
+	@NotEmpty(message = "El email debe completarse")
 	@Column(name = "email", nullable = false, length = 150)
 	private String email;
+
 	@Valid
-	@NotEmpty(message = "{El password debe completarse}")
+	@NotEmpty(message = "El password debe completarse")
 	@Column(name = "password", nullable = false, length = 60)
 	private String password;
+
 	@Valid
-	@NotEmpty(message = "{El nombre debe completarse}")
+	@NotEmpty(message = "El nombre debe completarse")
 	@Column(name = "firstname", nullable = false, length = 45)
 	private String firstName;
+	
 	@Valid
-	@NotEmpty(message = "{El apellido debe completarse}")
+	@NotEmpty(message = "El apellido debe completarse")
 	@Column(name = "lastname", nullable = false, length = 45)
 	private String lastName;
+
 	@Valid
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-
 	@Column(name = "birthdate", nullable = false)
 	private Date birthDate;
+
 	@Valid
+	@NotEmpty(message = "La nacionalidad debe completarse")
 	@Column(name = "nationality", nullable = false, length = 45)
 	private String nationality;
 

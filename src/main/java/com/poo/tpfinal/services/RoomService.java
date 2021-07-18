@@ -20,8 +20,8 @@ public class RoomService {
 
 
 
-	public Room findById(String id) {
-		return roomRepository.findByIdRoom(id);
+	public Room findById(Long id) {
+		return roomRepository.getOne(id);
 	}
 	
 }
