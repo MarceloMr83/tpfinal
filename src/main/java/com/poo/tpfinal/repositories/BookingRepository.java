@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+import com.dto.BookingDTO;
 import com.poo.tpfinal.entities.Booking;
 
 @Repository
@@ -13,6 +14,5 @@ public interface BookingRepository extends JpaRepository<Booking, Long>{
 
     @Query(value="SELECT b.idBooking,r.name,b.checkIn,b.checkOut,b.createdAt, b.breakfastIncluded,b.parking, \r\n" +
     "b.freeCancelation,b.cost FROM room r,booking b WHERE b.room=r.idRoom AND b.guest= :guest", nativeQuery = true)
-	  List<Booking> retrieveAllUserBookings(String guest);
-		
+    List<BookingDTO> getBookings(Long guest);		
 }

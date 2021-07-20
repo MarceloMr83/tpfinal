@@ -8,60 +8,60 @@
     <link rel="stylesheet"	href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
-    <!--incluir funciones javascript desde un archivo en la carpeta static-->
-    <script type="text/javascript" th:src="@{/js/functions.js}"></script>
-  </head>
-  <body>  
-    <form action="#" th:action="@{/bookingsUser}" th:object="${Booking}" method="post">
-    	<div class="col-xs-2 col-md-offset-4 col-md-4">
-    		<h2>Registracion</h2>
+	</head>
+	<body>  
+	<form action="#" th:action="@{/bookingsUser}" th:object="${bookings}" method="post">
+    	<div class="col-xs-2 col-md-offset-2 col-md-2">
+    		<h2>Mis reservas</h2>
     		<p style=color:#FF0000; th:text=${mensaje}></p>
 			<table class="table table-sm table-condensed">
 				<tr>
 					<th>
 						Id reserva
 					</th>
-				<th>
-					Habitacion
-				</th>
-				<th>
-					Fecha ingreso
-				</th>
-				<th>
-					Fecha egerso
-				</th>
-				<th>
-					Fecha reserva
-				</th>
-				<th>
-					Desayuno
-				</th>
-				<th>
-					Estacionamiento
-				</th>
-				<th>
-					Cancelacion gratuita
-				</th>
-				<th>
-					Fecha reserva
-				</th>
-				<th>
-					Precio
-				</th>
-			</tr>
-				<tr th:each="booking : ${listBooking}">
-					<td th:text="${room.name}"></td>
-					<td th:text="${room.price}"></td>
-					<td th:text="${room.occupancy}"></td>
-					<td th:text="${room.facilities}"></td>
-				<td>
-					<a th:href="@{/bookingDetail/{id}/{from}/{to}/{name}/{price}/{occupancy}/{facilities}(id=${room.idRoom},from=${from},to=${to},name=${room.name},price=${room.price},occupancy=${room.occupancy},facilities=${room.facilities})}"><span>Reservar</span></a>
-				</td>
-			</tr>
+					<th>
+						Habitacion
+					</th>
+					<th>
+						Fecha ingreso
+					</th>
+					<th>
+						Fecha egreso
+					</th>
+					<th>
+						Fecha reserva
+					</th>
+					<th>
+						Desayuno
+					</th>
+					<th>
+						Estacionamiento
+					</th>
+					<th>
+						Cancelacion gratuita
+					</th>
+					<th>
+						Fecha reserva
+					</th>
+					<th>
+						Precio
+					</th>
+				</tr>
+				<tr th:each="booking : ${bookings}">
+					<td th:text="${booking.getIdBooking()}"></td>
+					<td th:text="${booking.getName()}"></td>
+					<td th:text="${booking.getCheckIn()}"></td>
+					<td th:text="${booking.getCheckOut()}"></td>
+					<td th:text="${booking.getCreatedAt()}"></td>
+					<td th:text="${booking.getBreakFastIncluded()}"></td>
+					<td th:text="${booking.getParking()}"></td>
+					<td th:text="${booking.getFreeCancelation()}"></td>
+					<td th:text="${booking.getCreatedAt()}"></td>
+					<td th:text="${booking.getCost()}"></td>
+				</tr>
 		</table>
-		<button type="submit" class="btn btn-success">Buscar</button>
 		<button type="button" class="btn btn-primary" th:onclick="|window.location.href='/'|"> Volver</button>
   
-  </form>
+ </form>
 </body>
 </html>

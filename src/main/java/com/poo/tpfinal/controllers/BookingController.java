@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
 
+import com.dto.BookingDTO;
 import com.poo.tpfinal.entities.Booking;
 import com.poo.tpfinal.services.BookingService;
 
@@ -37,9 +38,9 @@ public class BookingController {
     return "booking-detail";
   }
 
-  @PostMapping("/bookingsUser")
+  @GetMapping("/bookingsUser")
     public String bookings(Model model){   
-      List<Booking> listBooking = bookingService.getAllUserBookings(guest);
+      List<BookingDTO> listBooking = bookingService.getAllUserBookings();
       model.addAttribute("bookings",listBooking);
         return "reserve-detail";
 	}	
