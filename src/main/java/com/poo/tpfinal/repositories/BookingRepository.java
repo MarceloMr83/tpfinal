@@ -12,7 +12,9 @@ import com.poo.tpfinal.entities.Booking;
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long>{
 
-    @Query(value="SELECT b.idBooking,r.name,b.checkIn,b.checkOut,b.createdAt, b.breakfastIncluded,b.parking, \r\n" +
-    "b.freeCancelation,b.cost FROM room r,booking b WHERE b.room=r.idRoom AND b.guest= :guest", nativeQuery = true)
+    @Query(value="SELECT b.idBooking,r.name,DATE_FORMAT(b.checkIn,'%d-%m-%Y') as checkIn,  \r\n" +
+     "DATE_FORMAT(b.checkOut,'%d-%m-%Y') as checkOut,DATE_FORMAT(b.createdAt,'%d-%m-%Y') as createdAt, \r\n" +
+     " IF(b.breakfastIncluded = True, 'SI', 'NO') AS  breakfastIncluded, IF(b.parking = True, 'SI', 'NO') AS parking, \r\n" +
+    " IF(b.freeCancelation = True, 'SI', 'NO') AS freeCancelation,b.cost FROM room r,booking b WHERE b.room=r.idRoom AND b.guest= :guest", nativeQuery = true)
     List<BookingDTO> getBookings(Long guest);		
 }

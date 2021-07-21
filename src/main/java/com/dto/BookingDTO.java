@@ -10,13 +10,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 //proyecta los datos a la interfazx
 
 public interface BookingDTO {
-
+    
     Long getIdBooking();
     String getName();
-    @DateTimeFormat(pattern = "dd-mm-yy")
-    Date getCheckIn();   
-    Date getCheckOut();   
-    Date getCreatedAt();    
+    String getCheckIn();   
+    String getCheckOut();   
+    String getCreatedAt();    
     String getBreakFastIncluded();    
     String getParking();  
     String getFreeCancelation();

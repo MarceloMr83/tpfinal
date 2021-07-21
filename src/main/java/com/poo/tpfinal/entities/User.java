@@ -31,7 +31,7 @@ public class User implements UserDetails {
 	private long idUser;
 
 	@Valid
-	@Email(message = "Ingrese una direcicon de email valida")
+	@Email(message = "Ingrese una direccion de email valida")
 	@NotEmpty(message = "El email debe completarse")
 	@Column(name = "email", nullable = false, length = 150)
 	private String email;
