@@ -1,9 +1,5 @@
 package com.dto;
 
-import java.util.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
 //Crea un DTO con los datos de las reservas de un cliente
 //La interfaz tiene métodos de acceso que
 // coinciden con todas las propiedades de la consulta de selección que se está recuperando.

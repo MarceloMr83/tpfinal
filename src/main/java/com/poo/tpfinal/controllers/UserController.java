@@ -67,18 +67,6 @@ public class UserController {
         if (logout != null)
             model.addAttribute("message", "Sesion cerrada correctamente");
     }
-
-        
-      
-    
-/*@GetMapping("/delete/{id}")
-public String deleteUser(@PathVariable("id") long id, Model model) {
-    User user = userRepository.findById(id)
-      .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-    userRepository.delete(user);
-    model.addAttribute("users", userRepository.findAll());
-    return "index";
-	*/
 	
 }
 

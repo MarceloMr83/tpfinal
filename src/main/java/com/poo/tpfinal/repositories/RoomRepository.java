@@ -12,8 +12,12 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 
 	public Optional<Room> findById(Long id);
 		
-	  @Query(value="SELECT * FROM room where NOT EXISTS (SELECT room FROM booking WHERE booking.room = room.idRoom AND \r\n" +
+	@Query(value="SELECT * FROM room where NOT EXISTS (SELECT room FROM booking WHERE booking.room = room.idRoom AND \r\n" +
 	  		"		((checkIn <= :from AND checkOut >= :from) OR (checkIn <= :to AND checkOut = :to))) and  room.occupancy >= :occupancy", nativeQuery = true)
-	  List<Room> retrieveAvailableRooms(Date from, Date to, String occupancy);
+	List<Room> retrieveAvailableRooms(Date from, Date to, String occupancy);
 
+	
+	@Query(value="SELECT * FROM room where EXISTS (SELECT room FROM booking WHERE booking.room = room.idRoom AND \r\n" +
+	" ((checkIn <= :from AND checkOut >= :from) OR (checkIn <= :to AND checkOut = :to)) and room.idRoom = :idRoom)", nativeQuery = true)
+	Room isRoomAvailable(Date from, Date to, Long idRoom);
 }

@@ -36,6 +36,7 @@ public class RoomController {
 			Date from = dateFormat.parse(fromDate);
 			Date to = dateFormat.parse(toDate);			
 			List<Room> listRooms = roomService.retrieveAvailableRooms(from, to,occupancy);
+			
 			model.addAttribute("listRooms", listRooms);
 			model.addAttribute("from", fromDate);
 			model.addAttribute("to", toDate);
@@ -44,17 +45,6 @@ public class RoomController {
 		}
 		return "availability";
 	}
-
-/*
-	@GetMapping("/rooms/{id}")
-	public Optional<Room> setBooking(@PathVariable Long id) {
-		 roomService.findById(id);
-		 	Optional<Room> room = roomService.findById(id);
-		 return room;
-	}
-*/
-
-
 
 
 	

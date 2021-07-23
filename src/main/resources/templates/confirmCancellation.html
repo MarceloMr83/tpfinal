@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+  <meta charset="UTF-8">
+    <!-- Bootstrap CSS 
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+  </head>
+  <body>  
+  <form action="#" th:action="@{/cancellationConfirm}" method="post">
+   
+  <div class="col-xs-2 col-md-offset-4 col-md-4">
+  <h2>Desea Cancelar la reserva?</h2>
+  <p style=color:#FF0000; th:text=${mensaje}></p>
+  <table class="table table-sm table-condensed">
+		<tr>
+			<td>
+        Tarjeta <input type="text" class="form-control" id="card" name="card">
+      </td>
+    </tr>
+		<tr>
+			<td>
+       Numero <input type="text" class="form-control" id="cardNumber" name="cardNumber">
+      </td>       
+    </table>  
+    <button type="submit" class="btn btn-success">Confirmar</button>
+    <button type="button" class="btn btn-primary" th:onclick="|window.location.href='/'|"> Cancelar</button>
+ </div>
+  </form>
+</body>
+</html>
