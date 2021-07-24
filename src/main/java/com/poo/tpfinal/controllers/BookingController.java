@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
 
-import com.dto.BookingDTO;
+import com.poo.tpfinal.dto.BookingDTO;
 import com.poo.tpfinal.entities.Booking;
 import com.poo.tpfinal.services.BookingService;
 

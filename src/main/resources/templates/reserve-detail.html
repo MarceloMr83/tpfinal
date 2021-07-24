@@ -52,7 +52,7 @@
             <td th:text="${booking.getFreeCancelation()}"></td>
             <td th:text="${booking.getCost()}"></td>
             <td>
-              <a th:href="@{/CancelBooking/{id}(id=${booking.getIdBooking()})}"><span>Cancelar</span></a>
+              <a th:href="@{/cancelBooking/{id}(id=${booking.getIdBooking()})}"><span>Detalle</span></a>
             </td>
           </tr>
         </table>

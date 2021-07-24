@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import com.dto.BookingDTO;
+import com.poo.tpfinal.dto.BookingDTO;
 import com.poo.tpfinal.entities.Booking;
 
 @Repository

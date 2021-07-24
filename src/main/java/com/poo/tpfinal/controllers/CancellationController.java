@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
 
-import com.dto.BookingDTO;
+import com.poo.tpfinal.dto.BookingDTO;
 import com.poo.tpfinal.entities.Booking;
 import com.poo.tpfinal.services.BookingService;
+import com.poo.tpfinal.services.CancellationService;
 
 @Controller
 @SessionAttributes("booking")
@@ -20,12 +21,20 @@ public class CancellationController {
 
   @Autowired
 	private BookingService bookingService;
+
+  @Autowired
+	private CancellationService cancellationService;
+
+
     
 	@GetMapping("/cancelBooking/{id}")
   public String showConfirmScreen(@PathVariable("id") Long idBooking, Model model) {
-    //agregar los datos a la vista previa de la reserva   
-    
-    return "booking-detail";
+    Booking booking = bookingService.getBooking(idBooking);
+    if(cancellationService.cancellationIsAvailable(booking)){
+      return "cancelBooking";
+    }
+    model.addAttribute("mensaje","Solo se pueden cancelar reservas hasta 48Hs antes de su inicio");
+    return "reserve-detail";
   }
 
   @GetMapping("/cancellationConfirm")

@@ -9,7 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.dto.BookingDTO;
+import com.poo.tpfinal.dto.BookingDTO;
 import com.poo.tpfinal.entities.Booking;
 import com.poo.tpfinal.entities.Room;
 import com.poo.tpfinal.entities.User;

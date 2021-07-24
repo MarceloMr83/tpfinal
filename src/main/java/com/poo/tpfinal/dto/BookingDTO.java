@@ -1,4 +1,4 @@
-package com.dto;
+package com.poo.tpfinal.dto;
 
 //Crea un DTO con los datos de las reservas de un cliente
 //La interfaz tiene métodos de acceso que
