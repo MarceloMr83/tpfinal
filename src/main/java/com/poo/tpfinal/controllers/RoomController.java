@@ -37,9 +37,8 @@ public class RoomController {
 			Date to = dateFormat.parse(toDate);			
 			List<Room> listRooms = roomService.retrieveAvailableRooms(from, to,occupancy);
 			if(listRooms.size()==0)			{
-				model.addAttribute("mensaje","No se encontraron habitaciones para esas fechas");
+				model.addAttribute("mensaje","No se encontraron habitaciones disponibles para esas fechas");
 			}
-			System.out.println(listRooms);
 			model.addAttribute("listRooms", listRooms);
 			model.addAttribute("from", fromDate);
 			model.addAttribute("to", toDate);
