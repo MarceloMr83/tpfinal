@@ -29,7 +29,7 @@ public class Cancellation {
     private Date createdAt;
     @NotNull
     @OneToOne
-    @JoinColumn(name = "idBooking", updatable = false, nullable = false)
+    @JoinColumn(name = "Booking", updatable = false, nullable = false)
     private Booking booking;
 
     public void setVersionNum(int version){

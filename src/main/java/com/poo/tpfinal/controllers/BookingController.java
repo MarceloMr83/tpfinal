@@ -5,14 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
 
 import com.poo.tpfinal.dto.BookingDetailDTO;
 import com.poo.tpfinal.dto.UserBookingDTO;
-import com.poo.tpfinal.entities.Booking;
 import com.poo.tpfinal.services.BookingService;
 
 @Controller
