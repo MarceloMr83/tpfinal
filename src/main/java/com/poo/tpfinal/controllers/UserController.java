@@ -50,7 +50,6 @@ public class UserController {
             return "signup";
         }	
         userService.addUser(user);
-      //  model.addAttribute("users", userService.retrieveAllUsers());
         return "index";
     }         
    

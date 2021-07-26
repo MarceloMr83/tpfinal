@@ -4,20 +4,16 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.poo.tpfinal.entities.Booking;
 import com.poo.tpfinal.entities.Cancellation;
-import com.poo.tpfinal.entities.Payment;
-import com.poo.tpfinal.repositories.BookingRepository;
 import com.poo.tpfinal.repositories.CancellationRepository;
-import com.poo.tpfinal.repositories.PaymentRepository;
 @Service
 public class CancellationService {
 
     @Autowired
 	private CancellationRepository cancellationRepository;
 
-
+    //crea y persiste el objeto cancellation en la base de datos
 	public void addCancellation(Booking booking) {
         Cancellation cancellation = new Cancellation();
         Date createdAt = new Date(); 
@@ -26,6 +22,7 @@ public class CancellationService {
 	    cancellationRepository.save(cancellation);
 	}	
 
+    //si hay menos de 2 dias antes de la reserva, ya no se puede cancelar
     public Boolean cancellationIsAvailable(Booking booking) {
         Date now = new Date(); 
         Date from = booking.getCheckIn();
@@ -37,18 +34,4 @@ public class CancellationService {
             return true;
         }
 	}	
-
-
-    /*
-
-public Payment newPayment(String card,String cardNumber,Booking booking){
-		Payment payment = new Payment();
-		 Date createdAt = new Date(); 
-		 payment.setCreatedAt(createdAt);
-		 payment.setCard(card);
-		 payment.setCardNumber(cardNumber);		 
-		 payment.setBooking(booking);
-		return payment;
-	}*/
-
 }

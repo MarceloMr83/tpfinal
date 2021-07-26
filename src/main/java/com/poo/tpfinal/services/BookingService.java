@@ -103,6 +103,7 @@ public class BookingService {
  		return booking;
 	}
 
+	//obitiene el DTO proyectando los datos de la consulta a la interfez UserBookingDTO
 	public List<UserBookingDTO> getAllUserBookings(){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();	   
 		User user = (User) auth.getPrincipal();	 

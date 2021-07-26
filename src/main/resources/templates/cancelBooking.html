@@ -7,24 +7,23 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
   </head>
   <body>  
-  <form action="#" th:action="@{/cancellationConfirm}" method="post">
-   
+    <form th:action="@{/cancellationConfirm}" method="post" enctype="multipart/form-data">
   <div class="col-xs-2 col-md-offset-4 col-md-4">
   <h2>Desea Cancelar la reserva?</h2>
-  <p style=color:#FF0000; th:text=${mensaje}></p>
   <table class="table table-sm table-condensed">
 		<tr>
 			<td>
-        Tarjeta <input type="text" class="form-control" id="card" name="card">
+        <button type="submit" class="btn btn-success">Confirmar cancelacion?</button>
       </td>
-    </tr>
-		<tr>
 			<td>
-       Numero <input type="text" class="form-control" id="cardNumber" name="cardNumber">
-      </td>       
-    </table>  
-    <button type="submit" class="btn btn-success">Confirmar</button>
-    <button type="button" class="btn btn-primary" th:onclick="|window.location.href='/'|"> Cancelar</button>
+        <button type="button" class="btn btn-primary" th:onclick="|window.location.href='/userBookings'|">Volver</button>
+      </td>
+      <tr>
+        <td>
+          Devolución del 90% del total si no fue contratado el servicio de cancelacion gratuita
+        </td>
+      </tr>
+    </table>      
  </div>
   </form>
 </body>

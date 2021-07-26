@@ -14,21 +14,21 @@
 </head>
 <body>
 	<!--recibe -->
-	<form th:action="@{/BookingCancel}" th:object="${booking}" method="post" enctype="multipart/form-data">
+	<form th:action="@{/cancelBooking}" th:object="${booking}" method="post" enctype="multipart/form-data">
 	<div class="col-xs-2 col-md-offset-4 col-md-4">
 	<h2>Detalle de reserva</h2>
 	<p style=color:#FF0000; th:text=${mensaje}></p>
 	<table class="table table-sm table-condensed">
 		<tr>
 			<td>				  
-				<input hidden name="idRoom" th:attr="value = ${booking.getIdBooking()}" type="text" readonly/>
+				<input hidden name="idBooking" th:attr="value = ${booking.getIdBooking()}" type="text" readonly/>
 				Fecha de reserva <input class="form-control" name="from" th:attr="value = ${booking.getCreatedAt()}" type="text" readonly/>
 			</td>
 		</tr>
 	
 		<tr>
 			<td>
-				Desde <input class="form-control" name="to" th:attr="value = ${booking.getCheckIn()}" type="text" readonly/>
+				Desde <input class="form-control" name="from" th:attr="value = ${booking.getCheckIn()}" type="text" readonly/>
 			</td>
 		</tr>
 
@@ -76,7 +76,7 @@
 		</tr>
 	</table>	
 	<button type="submit" class="btn btn-success">Cancelar reserva</button>
-	<button type="button" class="btn btn-primary" th:onclick="|window.location.href='/availability'|"> Volver</button>
+	<button type="button" class="btn btn-primary" th:onclick="|window.location.href='/userBookings'|"> Volver</button>
 	</div>
 	</form>
 
