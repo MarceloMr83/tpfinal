@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+  </head>
+  <body>
+    <form action="#" th:action="@{/userBookings}" th:object="${bookings}" method="post">
+      <div class="col-xs-2 col-md-offset-4 col-md-4">
+        <h2>Mis reservas</h2>
+        <p style="color: #ff0000" th:text="${mensaje}"></p>
+        <table class="table table-sm table-condensed">
+          <tr>
+            <th>Id reserva</th>
+            <th>Fecha de reserva</th>
+            <th>Fecha de ingreso</th>
+            <th>Fecha de egreso</th>
+            <th>Ir a detalle</th>
+          </tr>
+          <tr th:each="booking : ${bookings}">
+            <td th:text="${booking.getIdBooking()}"></td>
+            <td th:text="${booking.getCreatedAt()}"></td>
+            <td th:text="${booking.getCheckIn()}"></td>
+            <td th:text="${booking.getCheckOut()}"></td>
+            <td>
+              <a th:href="@{/userBookingDetail/{id}(id=${booking.getIdBooking()})}"><span>Detalle</span></a>
+            </td>
+          </tr>
+        </table>
+        <button type="button" class="btn btn-primary" th:onclick="|window.location.href='/'|" >Volver </button>
+      </div>
+    </form>
+  </body>
+</html>

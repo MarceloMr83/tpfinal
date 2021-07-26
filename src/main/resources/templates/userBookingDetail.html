@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html xmlns = "http://www.w3.org/1999/xhtml" 
+   xmlns:th = "http://www.thymeleaf.org" 
+   xmlns:sec = "http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+	<title>Reservas</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  	<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+  	<link rel="stylesheet"	href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+</head>
+<body>
+	<!--recibe -->
+	<form th:action="@{/BookingCancel}" th:object="${booking}" method="post" enctype="multipart/form-data">
+	<div class="col-xs-2 col-md-offset-4 col-md-4">
+	<h2>Detalle de reserva</h2>
+	<p style=color:#FF0000; th:text=${mensaje}></p>
+	<table class="table table-sm table-condensed">
+		<tr>
+			<td>				  
+				<input hidden name="idRoom" th:attr="value = ${booking.getIdBooking()}" type="text" readonly/>
+				Fecha de reserva <input class="form-control" name="from" th:attr="value = ${booking.getCreatedAt()}" type="text" readonly/>
+			</td>
+		</tr>
+	
+		<tr>
+			<td>
+				Desde <input class="form-control" name="to" th:attr="value = ${booking.getCheckIn()}" type="text" readonly/>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				Hasta <input class="form-control" name="to" th:attr="value = ${booking.getCheckOut()}" type="text" readonly/>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				Habitacion <input class="form-control" name="name" th:attr="value = ${booking.getName()}" type="text" readonly/>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				Capacidad <input class="form-control" name="occupancy" th:attr="value = ${booking.getOccupancy()}" type="text" readonly/>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				Comodidades <input class="form-control" name="facilities" th:attr="value = ${booking.getFacilities()}" type="text" readonly/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Cochera <input class="form-control" name="parking" id="parking" th:attr="value = ${booking.getParking()}" type="text" readonly/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Desayuno <input class="form-control" name="breakfastIncluded" id="breakfastIncluded" th:attr="value = ${booking.getBreakfastIncluded()}" type="text" readonly/>
+			</td>
+		</tr>
+			<td>
+				Cancelacion gratuita<input class="form-control" name="freeCancelation" id="freeCancelation" th:attr="value = ${booking.getFreeCancelation()}" type="text" readonly/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Importe total <input class="form-control" name="cost" id="cost" th:attr="value = ${booking.getCost()}" type="text" readonly/>
+			</td>
+		</tr>
+	</table>	
+	<button type="submit" class="btn btn-success">Cancelar reserva</button>
+	<button type="button" class="btn btn-primary" th:onclick="|window.location.href='/availability'|"> Volver</button>
+	</div>
+	</form>
+
+	
+
+	
+</body>
+</html>

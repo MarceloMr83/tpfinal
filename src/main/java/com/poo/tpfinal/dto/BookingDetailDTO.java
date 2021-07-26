@@ -5,14 +5,16 @@ package com.poo.tpfinal.dto;
 // coinciden con todas las propiedades de la consulta de selección que se está recuperando.
 //proyecta los datos a la interfazx
 
-public interface BookingDTO {
+public interface BookingDetailDTO {
     
     Long getIdBooking();
     String getName();
+    String getOccupancy();
+    String getFacilities();
     String getCheckIn();   
     String getCheckOut();   
     String getCreatedAt();    
-    String getBreakFastIncluded();    
+    String getBreakfastIncluded();    
     String getParking();  
     String getFreeCancelation();
     float getCost();    

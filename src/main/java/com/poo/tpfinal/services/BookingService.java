@@ -9,7 +9,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.poo.tpfinal.dto.BookingDTO;
+import com.poo.tpfinal.dto.BookingDetailDTO;
+import com.poo.tpfinal.dto.UserBookingDTO;
 import com.poo.tpfinal.entities.Booking;
 import com.poo.tpfinal.entities.Room;
 import com.poo.tpfinal.entities.User;
@@ -102,13 +103,14 @@ public class BookingService {
  		return booking;
 	}
 
-	public List<BookingDTO> getAllUserBookings(){
+	public List<UserBookingDTO> getAllUserBookings(){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();	   
 		User user = (User) auth.getPrincipal();	 
 		Long guest = user.getId();
-		return bookingRepository.getBookings(guest);
-	//return bookingRepository.retrieveAllUserBookings(guest);
-	
+		return bookingRepository.getUserBookings(guest);
 	}
 
+	public BookingDetailDTO getUserBookingsDetail(Long idBooking){
+		return bookingRepository.getUserBookingDetail(idBooking);
+	}
 }
