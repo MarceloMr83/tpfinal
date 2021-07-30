@@ -65,11 +65,12 @@ public class BookingService {
 		 Date from = dateFormat.getDate(fromDate);
 		 Date to = dateFormat.getDate(toDate);
 		 var diff = to.getTime() - from.getTime();  
-		 //entrada y salida el mismo dia se cobra como un dia
-		 if(diff ==0 ) {
-			 diff=1;
-		 }
 		 daydiff = diff / (1000 * 60 * 60 * 24);    
+		 //entrada y salida el mismo dia se cobra como un dia
+		 if(daydiff == 0 ) {
+			 daydiff=1;
+		 }
+		   
 	   return Float.parseFloat(price) * daydiff;  
 	}
 

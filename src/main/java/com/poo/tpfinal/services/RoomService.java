@@ -14,7 +14,7 @@ public class RoomService {
 	@Autowired
 	private RoomRepository roomRepository;
 
-	public List<Room> retrieveAvailableRooms(Date from, Date to,String occupancy) {
+	public List<Room> retrieveAvailableRooms(String from, String to,Long occupancy) {
 		return roomRepository.retrieveAvailableRooms(from, to, occupancy);
 	}
 

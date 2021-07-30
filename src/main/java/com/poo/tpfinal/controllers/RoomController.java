@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -30,14 +32,49 @@ public class RoomController {
 	@PostMapping("/rooms")
 	 public String viewRooms(@RequestParam(name = "from", required= false)
 	  String fromDate,@RequestParam(name = "to", required = false) String toDate,
-	  @RequestParam(name = "sleeps", required = false) String occupancy,  Model model) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+	  @RequestParam(name = "sleeps", required = false) Long occupancy,  Model model) {
+	
+		SimpleDateFormat parseador = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
+		Date from = null;
+		Date to = null;
+		String fromBooking=null;
+		String toBooking=null;
 		try {
+			from = parseador.parse(fromDate);
+			to = parseador.parse(toDate);
+				 fromBooking= formateador.format(from);
+				 toBooking= formateador.format(to);
+	
+				 List<Room> listRooms = roomService.retrieveAvailableRooms(fromBooking, toBooking,occupancy);
+				 if(listRooms.size()==0){
+					model.addAttribute("mensaje","No se encontraron habitaciones disponibles para esas fechas");
+				}
+				else{
+					model.addAttribute("listRooms", listRooms);
+				 	model.addAttribute("from", fromDate);
+				 	model.addAttribute("to", toDate);
+				}
+
+
+			} catch (ParseException e) {
+				model.addAttribute("mensaje","Por favor ingrese las fechas de ingreso y egreso de la reserva");
+				e.printStackTrace();
+			}
+
+
+
+			
+		
+
+	/*	try {
+			System.out.println(fromDate + " " + toDate + " " + occupancy);
 			//convierte fecha ingresada en la vista como dd-mm-yyyy a yyyy-mm-dd
 			Date from = dateFormat.parse(fromDate);
-			Date to = dateFormat.parse(toDate);			
+			Date to = dateFormat.parse(toDate);	
+			
 			List<Room> listRooms = roomService.retrieveAvailableRooms(from, to,occupancy);
-			if(listRooms.size()==0)			{
+			if(listRooms.size()==0){
 				model.addAttribute("mensaje","No se encontraron habitaciones disponibles para esas fechas");
 			}
 			model.addAttribute("listRooms", listRooms);
@@ -46,8 +83,22 @@ public class RoomController {
 		} catch (ParseException e) {
 			model.addAttribute("mensaje","Por favor ingrese las fechas de ingreso y egreso de la reserva");
 		}
+		return "availability";*/
+		
+		
+		
+			//Date from = dateFormat.parse(fromDate);
+			//Date to = dateFormat.parse(toDate);	
+
+			
+			
+	
 		return "availability";
+		
 	}
+
+
+
 
 
 	

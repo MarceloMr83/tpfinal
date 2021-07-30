@@ -15,7 +15,7 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 	//query original, solo habitacionesa disponibles
 	/*@Query(value="SELECT * FROM room where NOT EXISTS (SELECT room FROM booking WHERE booking.room = room.idRoom AND \r\n" +
 	  		"		((checkIn <= :from AND checkOut >= :from) OR (checkIn <= :to AND checkOut = :to))) and  room.occupancy >= :occupancy", nativeQuery = true)
-	List<Room> retrieveAvailableRooms(Date from, Date to, String occupancy);*/
+	List<Room> retrieveAvailableRooms(String from, String to, Long occupancy);*/
 
 	//trae las habitaciones disponibles, si esta cancelada la reserva se toma como disponible
 	@Query(value="SELECT * FROM room where NOT EXISTS (SELECT room FROM booking WHERE booking.room = room.idRoom AND \r\n" +
@@ -26,7 +26,8 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 	"(SELECT idBooking FROM booking,cancellation WHERE \r\n" +
 	"((checkIn <= :from AND checkOut >= :from) OR \r\n"+
 	"(checkIn <= :to AND checkOut >= :to)) AND cancellation.booking IS not NULL AND room.occupancy >= :occupancy)", nativeQuery = true)
-	List<Room> retrieveAvailableRooms(Date from, Date to, String occupancy);
+	List<Room> retrieveAvailableRooms(String from, String to, Long occupancy);
+
 		
 	//verifica si una habitacion indicada esta ocupada en ese momento, si esta cancelada la reserva se toma como disponible
 	@Query(value="SELECT * FROM room where EXISTS (SELECT room FROM booking WHERE booking.room = room.idRoom AND \r\n"+
@@ -37,9 +38,4 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 	"(checkIn <= :to AND checkOut >= :to)) AND cancellation.booking IS not NULL AND room.idRoom = :idRoom)", nativeQuery = true)
 	Room isRoomAvailable(String from, String to, Long idRoom);
 	
-
-/*
-	@Query(value="SELECT * FROM room where EXISTS (SELECT room FROM booking WHERE booking.room = room.idRoom AND \r\n" +
-	" ((checkIn <= :from AND checkOut >= :from) OR (checkIn <= :to AND checkOut >= :to)) and room.idRoom = :idRoom)", nativeQuery = true)
-	Room isRoomAvailable(String from, String to, Long idRoom);*/
 }
