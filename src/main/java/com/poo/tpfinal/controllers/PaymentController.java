@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpSession;
@@ -53,12 +54,17 @@ public class PaymentController {
 		 //crea la tabla hija payment
 		 Payment payment = paymentService.newPayment(card, cardNumber, booking);	
 		 //verificar si tardo mucho tiempo y alguien ya la reservo
+
 		 Date from = booking.getCheckIn();
 		 Date to = booking.getCheckOut();
-		 Long idRoom = booking.getRoom().getIdRoom();
 
+		//convertimos el date a formato yyyy-mm-dd para que coincida con el formato date de la base de datos
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String fromAvailable = formatter.format(from);
+		String toAvailable = formatter.format(to);	
+		Long idRoom = booking.getRoom().getIdRoom();
 		 //verificar si ya la reservo alguien y ya no esta disponible
-		if(roomService.isRoomAvailable(from, to, idRoom)){
+		if(roomService.isRoomAvailable(fromAvailable, toAvailable, idRoom)){
 			//guarda la reserva y el pago
 			bookingService.addBooking(booking);
 			paymentService.addPayment(payment);	

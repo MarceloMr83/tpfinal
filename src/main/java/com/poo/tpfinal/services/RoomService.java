@@ -18,8 +18,7 @@ public class RoomService {
 		return roomRepository.retrieveAvailableRooms(from, to, occupancy);
 	}
 
-	public Boolean isRoomAvailable(Date from, Date to,Long idRoom) {
-		System.out.println("habitacion"+idRoom);
+	public Boolean isRoomAvailable(String from, String to,Long idRoom) {
 		Room room = roomRepository.isRoomAvailable(from, to, idRoom);
 		if(room == null){
 			return true;

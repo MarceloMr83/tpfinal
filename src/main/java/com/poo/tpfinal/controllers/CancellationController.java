@@ -24,7 +24,7 @@ public class CancellationController {
 	private CancellationService cancellationService;
     
 	@PostMapping("/cancelBooking")
-  public String cancelBooking(@RequestParam(name = "idBooking", required= false) Long idBooking, Model model) {
+  public String cancelBooking(@RequestParam(name = "idBooking", required= true) Long idBooking, Model model) {
     Booking booking = bookingService.getBooking(idBooking);
     if(cancellationService.cancellationIsAvailable(booking)){
       //pasamos el objeto booking a sesion
@@ -34,7 +34,7 @@ public class CancellationController {
         return "cancelBooking";
     }
     model.addAttribute("mensaje","Solo se pueden cancelar reservas hasta 48Hs antes de su inicio");
-    return "userBookingDetail";
+    return "status";
   }
 
   @PostMapping("/cancellationConfirm")

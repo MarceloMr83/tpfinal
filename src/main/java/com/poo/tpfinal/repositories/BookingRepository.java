@@ -15,7 +15,7 @@ public interface BookingRepository extends JpaRepository<Booking, Long>{
 
     @Query(value="SELECT b.idBooking,DATE_FORMAT(b.createdAt,'%d-%m-%Y') as createdAt, DATE_FORMAT(b.checkIn,'%d-%m-%Y') as checkIn,  \r\n" +
      "DATE_FORMAT(b.checkOut,'%d-%m-%Y') as checkOut \r\n" +
-     "from booking b WHERE b.guest= :guest", nativeQuery = true)
+     "from booking b WHERE b.guest= :guest order by b.checkIn asc", nativeQuery = true)
     List<UserBookingDTO> getUserBookings(Long guest);	
     
     @Query(value="SELECT b.idBooking,r.name,r.facilities,r.occupancy,DATE_FORMAT(b.checkIn,'%d-%m-%Y') as checkIn,  \r\n" +

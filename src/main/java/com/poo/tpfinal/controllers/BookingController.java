@@ -40,7 +40,12 @@ public class BookingController {
   @GetMapping("/userBookings")
     public String bookings(Model model){   
       List<UserBookingDTO> listBooking = bookingService.getAllUserBookings();
+      if(listBooking.size()==0){
+        model.addAttribute("mensaje","Aun no se ha realizado ninguna reserva");
+      }
+      else{
       model.addAttribute("bookings",listBooking);
+      }
       return "userBookings";
 	}	
 

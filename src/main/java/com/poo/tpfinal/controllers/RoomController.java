@@ -33,6 +33,7 @@ public class RoomController {
 	  @RequestParam(name = "sleeps", required = false) String occupancy,  Model model) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		try {
+			//convierte fecha ingresada en la vista como dd-mm-yyyy a yyyy-mm-dd
 			Date from = dateFormat.parse(fromDate);
 			Date to = dateFormat.parse(toDate);			
 			List<Room> listRooms = roomService.retrieveAvailableRooms(from, to,occupancy);

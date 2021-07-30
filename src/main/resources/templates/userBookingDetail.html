@@ -21,7 +21,7 @@
 	<table class="table table-sm table-condensed">
 		<tr>
 			<td>				  
-				<input hidden name="idBooking" th:attr="value = ${booking.getIdBooking()}" type="text" readonly/>
+				<input  name="idBooking" th:attr="value = ${booking.getIdBooking()}" type="text" readonly/>
 				Fecha de reserva <input class="form-control" name="from" th:attr="value = ${booking.getCreatedAt()}" type="text" readonly/>
 			</td>
 		</tr>

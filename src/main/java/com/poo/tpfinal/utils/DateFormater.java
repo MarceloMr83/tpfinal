@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateFormater {
+	//convertir fechas dd-mm-yyyy a yyyy-mm-dd
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     Date date;
