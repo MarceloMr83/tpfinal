@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.poo.tpfinal.dto.BookingDetailDTO;
 import com.poo.tpfinal.dto.UserBookingDTO;
+import com.poo.tpfinal.dto.UserDTO;
 import com.poo.tpfinal.entities.Booking;
 import com.poo.tpfinal.entities.Room;
 import com.poo.tpfinal.entities.User;
@@ -60,7 +61,7 @@ public class BookingService {
 	public float calculateCost(String fromDate,String toDate,String price){
 		long daydiff=1;
 	   //formatea las fecha desde y hasta y la agrega la reserva
-	   //convertir fecha dd-mm-yyyy a yyyy-mm-dd
+	   //convertir fecha dd-mm-yyyy a yyyy-mm-dd en formato date
 		DateFormater dateFormat = new DateFormater();
 		 Date from = dateFormat.getDate(fromDate);
 		 Date to = dateFormat.getDate(toDate);
@@ -104,10 +105,10 @@ public class BookingService {
  		return booking;
 	}
 
-	//obitiene el DTO proyectando los datos de la consulta a la interfez UserBookingDTO
+	//obtiene el DTO proyectando los datos de la consulta a la interfez UserBookingDTO
 	public List<UserBookingDTO> getAllUserBookings(){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();	   
-		User user = (User) auth.getPrincipal();	 
+		User user = (User) auth.getPrincipal();	
 		Long guest = user.getId();
 		return bookingRepository.getUserBookings(guest);
 	}
