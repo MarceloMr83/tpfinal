@@ -36,11 +36,11 @@ public class Payment {
     @JoinColumn(name="booking")
     private Booking booking;
 
-    @NotEmpty
+    @NotEmpty(message = "El tipo de tarjeta completarse")
     @Column(name = "card", nullable = false)
     private String card;
 
-    @NotEmpty
+    @NotEmpty(message = "EL numero de tarjeta debe completarse")
     @Column(name = "cardNumber", nullable = false)
     private String cardNumber;
     

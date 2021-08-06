@@ -20,6 +20,7 @@ public class RoomService {
 	public Boolean isRoomAvailable(String from, String to,Long idRoom) {
 		Room room = roomRepository.isRoomAvailable(from, to, idRoom);
 		if(room == null){
+			System.out.println("esta vacia");
 			return true;
 		}
 		else{

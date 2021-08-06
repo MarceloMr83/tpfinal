@@ -30,7 +30,7 @@ public class PaymentController {
 
 	@Autowired
 	private RoomService roomService;
-
+/*
 	@PostMapping("/payment")
 	public String payment(@RequestParam(name = "idRoom", required= true) Long idRoom,@RequestParam(name = "from", required= true)	String from,
 	@RequestParam(name = "to", required= true) String to,@RequestParam(name = "total", required= false) float cost,@RequestParam(name = "parking", required= false)
@@ -42,7 +42,7 @@ public class PaymentController {
 		HttpSession session = request.getRequest().getSession(true);
 		session.setAttribute("booking", booking); 
 		return "payment";
-	}
+	}*/
 
 	@PostMapping("/paymentConfirm")
     public String paymentConfirm(@RequestParam(name = "card", required= false)
@@ -52,6 +52,11 @@ public class PaymentController {
 		 HttpSession session = request.getRequest().getSession(true);
 		 Booking booking = (Booking) session.getAttribute("booking");
 		 //crea la tabla hija payment
+
+		 if(card=="" || cardNumber==""){
+			model.addAttribute("mensaje","Ingrese los datos de la tarjeta");
+			return "payment";
+		 }
 		 Payment payment = paymentService.newPayment(card, cardNumber, booking);	
 		 //verificar si tardo mucho tiempo y alguien ya la reservo
 
@@ -63,15 +68,19 @@ public class PaymentController {
 		String fromAvailable = formatter.format(from);
 		String toAvailable = formatter.format(to);	
 		Long idRoom = booking.getRoom().getIdRoom();
+		System.out.println("disponible " + fromAvailable);
 		 //verificar si ya la reservo alguien y ya no esta disponible
 		if(roomService.isRoomAvailable(fromAvailable, toAvailable, idRoom)){
 			//guarda la reserva y el pago
 			bookingService.addBooking(booking);
 			paymentService.addPayment(payment);	
 			model.addAttribute("mensaje", "La reserva se realizó correctamente");
+			session.removeAttribute("booking");
+			
+			//session.removeAttribute("booking");		
 		}
 		else{
-			model.addAttribute("mensaje","La habitacion ya no se encuentra disopnible");
+			model.addAttribute("mensaje","La habitacion ya no se encuentra disponible");
 		}
 		
         return "status";

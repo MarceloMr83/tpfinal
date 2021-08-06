@@ -5,12 +5,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.poo.tpfinal.dto.BookingDetailDTO;
 import com.poo.tpfinal.dto.UserBookingDTO;
+import com.poo.tpfinal.entities.Booking;
 import com.poo.tpfinal.services.BookingService;
 
 @Controller
@@ -55,6 +62,25 @@ public class BookingController {
       model.addAttribute("booking",booking);
         return "userBookingDetail";
 	}
+
+  @PostMapping("/newBooking")
+	public String payment(@RequestParam(name = "idRoom", required= true) Long idRoom,@RequestParam(name = "from", required= true)	String from,
+	@RequestParam(name = "to", required= true) String to,@RequestParam(name = "total", required= false) float cost,@RequestParam(name = "parking", required= false)
+	 boolean parking,@RequestParam(name = "breakfastIncluded", required= false) boolean breakfastIncluded,@RequestParam(name = "freeCancelation", required= false)
+	 boolean freeCancelation){
+		 //crea la instancia de booking y sigue a confirmar el pago
+     System.out.println("BOOKINGGGGGGGGGGGGGGGGG"+idRoom+" "+from);
+		 Booking booking = bookingService.newBooking(idRoom, from, to, cost, parking, breakfastIncluded, freeCancelation);
+		 ServletRequestAttributes request = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		HttpSession session = request.getRequest().getSession(true);
+    session.removeAttribute("booking");
+		session.setAttribute("booking", booking); 
+		return "payment";
+	}
+
+
+
+
 
 
 

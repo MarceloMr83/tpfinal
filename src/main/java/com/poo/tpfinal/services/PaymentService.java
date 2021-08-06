@@ -27,5 +27,4 @@ public Payment newPayment(String card,String cardNumber,Booking booking){
 		 payment.setBooking(booking);
 		return payment;
 	}
-
 }

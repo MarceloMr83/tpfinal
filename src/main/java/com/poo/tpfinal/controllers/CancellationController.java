@@ -44,7 +44,8 @@ public class CancellationController {
 		 Booking booking = (Booking) session.getAttribute("booking"); 
      try {
       cancellationService.addCancellation(booking);
-      model.addAttribute("mensaje","Su reserva fue cancelada!");       
+      model.addAttribute("mensaje","Su reserva fue cancelada!");
+      session.removeAttribute("booking");       
      } catch (Exception e) {
         model.addAttribute("mensaje",e);
      }  
