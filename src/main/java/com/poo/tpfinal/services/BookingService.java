@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.poo.tpfinal.dto.BookingDetailDTO;
 import com.poo.tpfinal.dto.UserBookingDTO;
-import com.poo.tpfinal.dto.UserDTO;
 import com.poo.tpfinal.entities.Booking;
 import com.poo.tpfinal.entities.Room;
 import com.poo.tpfinal.entities.User;
@@ -94,7 +93,7 @@ public class BookingService {
 	   Authentication auth = SecurityContextHolder.getContext().getAuthentication();	   
 	   //todo - convertir en DTO objeto user
 	   User guest = (User) auth.getPrincipal();	 
-	   System.out.println("Password:"+guest.getPassword());
+	   //System.out.println("Password:"+guest.getPassword());
 	    booking.setCreatedAt(createdAt);
 	   booking.setGuest(guest);
 	   booking.setRoom(room);

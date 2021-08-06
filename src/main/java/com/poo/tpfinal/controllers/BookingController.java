@@ -74,7 +74,6 @@ public class BookingController {
 		HttpSession session = request.getRequest().getSession(true);
     session.removeAttribute("booking");
 		session.setAttribute("booking", booking); 
-    System.out.println("COSTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"+booking.getCost());
 		return "payment";
 	}
 

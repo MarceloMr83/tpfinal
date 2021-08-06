@@ -38,8 +38,6 @@ public class PaymentController {
 		 //trae el booking creado en el otro controlador
 		 HttpSession session = request.getRequest().getSession(true);
 		 Booking booking = (Booking) session.getAttribute("booking");
-		 System.out.println("LLEGO EL COSTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT:"+booking.getCost());
-
 		 //si no se ingreso el numreo de tarjeta o el tipo, los vuelve a pedir
 		 if(card.equals("") || cardNumber.equals("")){
 			model.addAttribute("mensaje","Ingrese los datos de la tarjeta");
