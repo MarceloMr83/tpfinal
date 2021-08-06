@@ -30,19 +30,6 @@ public class PaymentController {
 
 	@Autowired
 	private RoomService roomService;
-/*
-	@PostMapping("/payment")
-	public String payment(@RequestParam(name = "idRoom", required= true) Long idRoom,@RequestParam(name = "from", required= true)	String from,
-	@RequestParam(name = "to", required= true) String to,@RequestParam(name = "total", required= false) float cost,@RequestParam(name = "parking", required= false)
-	 boolean parking,@RequestParam(name = "breakfastIncluded", required= false) boolean breakfastIncluded,@RequestParam(name = "freeCancelation", required= false)
-	 boolean freeCancelation){
-		 //crea la instancia de booking y sigue a confirmar el pago
-		 Booking booking = bookingService.newBooking(idRoom, from, to, cost, parking, breakfastIncluded, freeCancelation);
-		 ServletRequestAttributes request = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-		HttpSession session = request.getRequest().getSession(true);
-		session.setAttribute("booking", booking); 
-		return "payment";
-	}*/
 
 	@PostMapping("/paymentConfirm")
     public String paymentConfirm(@RequestParam(name = "card", required= false)
@@ -51,14 +38,16 @@ public class PaymentController {
 		 //trae el booking creado en el otro controlador
 		 HttpSession session = request.getRequest().getSession(true);
 		 Booking booking = (Booking) session.getAttribute("booking");
-		 //crea la tabla hija payment
+		 System.out.println("LLEGO EL COSTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT:"+booking.getCost());
 
-		 if(card=="" || cardNumber==""){
+		 //si no se ingreso el numreo de tarjeta o el tipo, los vuelve a pedir
+		 if(card.equals("") || cardNumber.equals("")){
 			model.addAttribute("mensaje","Ingrese los datos de la tarjeta");
 			return "payment";
 		 }
+		 //crea la instancia de payment,
 		 Payment payment = paymentService.newPayment(card, cardNumber, booking);	
-		 //verificar si tardo mucho tiempo y alguien ya la reservo
+		 //verificar si tardo mucho tiempo para realizar el pago y alguien ya la reservo
 
 		 Date from = booking.getCheckIn();
 		 Date to = booking.getCheckOut();
@@ -68,21 +57,18 @@ public class PaymentController {
 		String fromAvailable = formatter.format(from);
 		String toAvailable = formatter.format(to);	
 		Long idRoom = booking.getRoom().getIdRoom();
-		System.out.println("disponible " + fromAvailable);
 		 //verificar si ya la reservo alguien y ya no esta disponible
 		if(roomService.isRoomAvailable(fromAvailable, toAvailable, idRoom)){
 			//guarda la reserva y el pago
 			bookingService.addBooking(booking);
 			paymentService.addPayment(payment);	
-			model.addAttribute("mensaje", "La reserva se realizó correctamente");
-			session.removeAttribute("booking");
-			
-			//session.removeAttribute("booking");		
+			model.addAttribute("mensaje", "La reserva se realizó correctamente");	
 		}
 		else{
 			model.addAttribute("mensaje","La habitacion ya no se encuentra disponible");
 		}
-		
+		//limpiamos el objeto reserva de la sesion
+		session.removeAttribute("booking");		
         return "status";
 	}	
 }

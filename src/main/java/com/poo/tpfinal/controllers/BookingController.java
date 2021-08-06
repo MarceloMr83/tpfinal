@@ -69,12 +69,12 @@ public class BookingController {
 	 boolean parking,@RequestParam(name = "breakfastIncluded", required= false) boolean breakfastIncluded,@RequestParam(name = "freeCancelation", required= false)
 	 boolean freeCancelation){
 		 //crea la instancia de booking y sigue a confirmar el pago
-     System.out.println("BOOKINGGGGGGGGGGGGGGGGG"+idRoom+" "+from);
 		 Booking booking = bookingService.newBooking(idRoom, from, to, cost, parking, breakfastIncluded, freeCancelation);
 		 ServletRequestAttributes request = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 		HttpSession session = request.getRequest().getSession(true);
     session.removeAttribute("booking");
 		session.setAttribute("booking", booking); 
+    System.out.println("COSTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"+booking.getCost());
 		return "payment";
 	}
 
