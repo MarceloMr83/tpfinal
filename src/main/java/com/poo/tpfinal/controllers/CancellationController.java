@@ -48,12 +48,8 @@ public class CancellationController {
       session.removeAttribute("booking");       
      } catch (Exception e) {
         model.addAttribute("mensaje",e);
-     }  
-     
+     }       
         return "status";
-	}	
-
-
-	
+	}		
 }
 
