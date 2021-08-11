@@ -9,6 +9,8 @@ import javax.persistence.Version;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -52,6 +54,7 @@ public class User implements UserDetails {
 	private String lastName;
 
 	@Valid
+	@NotNull(message = "La fecha de nacimiento debe ingresarse")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "birthdate", nullable = false)
 	private Date birthDate;
