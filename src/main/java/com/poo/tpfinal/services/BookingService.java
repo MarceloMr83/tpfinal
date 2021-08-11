@@ -39,19 +39,6 @@ public class BookingService {
 	public Booking getBooking(Long id) {
 	    return bookingRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
 	}
-	
-	public Booking replaceRoom(Booking booking, Long id) {
-		return bookingRepository.findById(id)
-	      .map(u -> {
-            u.setCheckIn(booking.getCheckIn());
-            u.setCheckOut(booking.getCheckOut());
-            u.setCost(booking.getCost());
-	        return bookingRepository.save(u);
-	      })
-	      .orElseGet(() -> {
-	        return bookingRepository.save(booking);
-	      });
-	}
 
 	public void deleteBooking(@PathVariable Long id) {
 		bookingRepository.deleteById(id);
@@ -82,6 +69,9 @@ public class BookingService {
 		//convertir fecha dd-mm-yyyy a yyyy-mm-dd
 		DateFormater dateFormat = new DateFormater();
 		Date createdAt = new Date(); 
+		
+		System.out.println("CCREATED AT" + createdAt);
+		
 		booking.setCreatedAt(createdAt);	   
 		Date from = dateFormat.getDate(fromDate) ;
 		Date to = dateFormat.getDate(toDate);

@@ -64,7 +64,7 @@ public class BookingController {
 	}
 
   @PostMapping("/newBooking")
-	public String payment(@RequestParam(name = "idRoom", required= true) Long idRoom,@RequestParam(name = "from", required= true)	String from,
+	public String newBooking(@RequestParam(name = "idRoom", required= true) Long idRoom,@RequestParam(name = "from", required= true)	String from,
 	@RequestParam(name = "to", required= true) String to,@RequestParam(name = "total", required= false) float cost,@RequestParam(name = "parking", required= false)
 	 boolean parking,@RequestParam(name = "breakfastIncluded", required= false) boolean breakfastIncluded,@RequestParam(name = "freeCancelation", required= false)
 	 boolean freeCancelation){

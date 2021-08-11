@@ -40,68 +40,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 and().
                 logout()
                 .logoutSuccessUrl("/logout.html");
-}
-    
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- /*
-@Configuration
-@EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
- 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/css/**", "/js/**", "/images/**").permitAll()
-                .antMatchers("/adduser").permitAll()
-                .antMatchers("/signup").permitAll()
-                .antMatchers("/booking").permitAll()
-                .antMatchers("/bookingDetail").hasRole("USER")
-                .anyRequest().hasRole("USER")
-                .and()
-                .formLogin()
-                .and()
-                .logout()
-                .permitAll();
     }
-    @Override
-protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth
-        .userDetailsService(UserDetailsService)
-        .passwordEncoder(getPasswordEncoder());
 }
-    @Autowired
-    private DataSource dataSource;
 
-    @Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-    }
- /*   
-    @Autowired
-    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().passwordEncoder(passwordEncoder())
-            .dataSource(dataSource)
-            .usersByUsernameQuery("select email,password,idUser from user where email=?")
-            .aut
-            /*.authoritiesByUsernameQuery(
-                    "SELECT email, 'ROLE_USER' FROM user WHERE email=?");*/
-        
-  //  }   */
-//}
+
+
+
+
+
+
+
+
+
+
+
+
