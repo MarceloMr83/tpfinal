@@ -33,7 +33,6 @@ public class UserController {
   
 	@PostMapping("/adduser")
     public String addUser(@Valid User user, BindingResult result, Model model) { 
-        //model.addAttribute("User", new User());
         User existing = userService.getUserByEmail(user.getEmail());
     if (existing!=null) {
            result.rejectValue("email", null, "El usuario ya se encuentra registrado"); 
